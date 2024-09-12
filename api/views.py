@@ -11,7 +11,6 @@ from api.models import Task, Subtask
 from join_backend.serializers import TaskSerializer, SubtaskSerializer
 
 
-
 class LoginView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data,
