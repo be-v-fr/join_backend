@@ -24,7 +24,9 @@ urlpatterns = [
     path('api/login', LoginView.as_view()),
     path('api/register', RegisterView.as_view()),
     path('api/tasks', TasksView.as_view()),
+    path('api/tasks/<int:pk>', TasksView.as_view()),
     path('api/subtasks', SubtasksView.as_view()),
+    path('api/subtasks/<int:pk>', SubtasksView.as_view()),
     path('api/users', UsersView.as_view()),
     path('api/contacts', ContactsView.as_view()),
 ]
