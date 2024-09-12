@@ -37,8 +37,8 @@ class TasksView(APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request, format=None):
-        todos = Task.objects.all()
-        serializer = TaskSerializer(todos, many=True)
+        tasks = Task.objects.all()
+        serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -55,8 +55,8 @@ class SubtasksView(APIView):
     permission_classes = [IsAuthenticated]
     
     def get(self, request, format=None):
-        todos = Subtask.objects.all()
-        serializer = SubtaskSerializer(todos, many=True)
+        subtasks = Subtask.objects.all()
+        serializer = SubtaskSerializer(subtasks, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
