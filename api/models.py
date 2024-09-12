@@ -26,7 +26,7 @@ class Task(models.Model):
     
     
     def __str__(self):
-        return f"{self.title}"
+        return f"({self.id}) {self.title}"
     
     
 class Subtask(models.Model):
@@ -39,4 +39,4 @@ class Subtask(models.Model):
     
     
     def __str__(self):
-        return f"{self.title}"
+        return f"({self.id}) {self.title}"
