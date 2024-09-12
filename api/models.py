@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.conf import settings
 import datetime
 from .utils import PRIORITY, CATEGORY, STATUS_ALL, STATUS_BASE
@@ -7,7 +8,7 @@ from .utils import PRIORITY, CATEGORY, STATUS_ALL, STATUS_BASE
 class Task(models.Model):
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=500)
-    # assigned_to
+    assigned_to = models.ManyToManyField(User, default=None, blank=True)
     created_at = models.DateField(default=datetime.date.today)
     due = models.DateField(default=datetime.date.today)
     prio = models.PositiveSmallIntegerField(
