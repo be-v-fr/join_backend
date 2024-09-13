@@ -1,7 +1,8 @@
 from django.contrib import admin
 
-from api.models import Task, Subtask 
+from api.models import AppUser, Task, Subtask, CustomContact 
 
-# Register your models here.
+admin.site.register(AppUser)
 admin.site.register(Task)
 admin.site.register(Subtask)
+admin.site.register(CustomContact)

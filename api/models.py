@@ -1,8 +1,9 @@
+import random
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 import datetime
-from .utils import PRIORITY, CATEGORY, STATUS_ALL, STATUS_BASE
+from .utils import PRIORITY, CATEGORY, STATUS_ALL, STATUS_BASE, PERSON_COLORS
 
 
 class Task(models.Model):
@@ -40,3 +41,22 @@ class Subtask(models.Model):
     
     def __str__(self):
         return f"({self.id}) {self.title}"
+    
+    
+class AppUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    color = models.CharField(
+        max_length=7,
+        choices=PERSON_COLORS,
+        default=random.randint(1,25),
+    )
+    
+    
+class CustomContact(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.CharField(max_length=50)
+    color = models.CharField(
+        max_length=7,
+        choices=PERSON_COLORS,
+        default=random.randint(1,25),
+    )

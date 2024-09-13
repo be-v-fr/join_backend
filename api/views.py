@@ -85,7 +85,6 @@ class SubtasksView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
-    ### NOT WORKING YET ###
     def put(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         subtask = Subtask.objects.get(id=pk)
