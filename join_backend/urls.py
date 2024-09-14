@@ -29,4 +29,5 @@ urlpatterns = [
     path('api/subtasks/<int:pk>', SubtasksView.as_view()),
     path('api/users', UsersView.as_view()),
     path('api/contacts', ContactsView.as_view()),
+    path('api/contacts/<int:pk>', ContactsView.as_view()),
 ]

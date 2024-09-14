@@ -1,12 +1,19 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from api.models import Task, Subtask
+from api.models import AppUser, CustomContact, Task, Subtask
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email'] 
+        fields = ['id', 'username', 'email']
+        
+        
+class AppUserSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), default=UserSerializer())
+    class Meta:
+        model = AppUser
+        fields = ['id', 'user', 'color']
 
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
@@ -23,3 +30,11 @@ class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Subtask
         fields = ['id', 'title', 'status', 'task']
+        
+        
+class CustomContactSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), default=UserSerializer())
+    class Meta:
+        model = CustomContact
+        fields = ['id', 'user', 'name', 'email', 'color']
+        
