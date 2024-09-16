@@ -21,7 +21,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         
         
 class AppUserSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), default=UserSerializer())
+    user = UserSerializer(read_only=True)
+    
     class Meta:
         model = AppUser
         fields = ['id', 'user', 'color']
