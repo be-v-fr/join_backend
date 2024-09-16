@@ -128,6 +128,19 @@ class UsersView(APIView):
         return Response(serializer.data)
     
     
+class CurrentUserView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    
+    def get(self, request, format=None):
+        user = AppUser.objects.get(user=request.user)
+        if(user):
+            serializer = AppUserSerializer(user)
+            return Response(serializer.data)
+        return Response(status=status.HTTP_404_NOT_FOUND)   
+    
+    
 class ContactsView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
