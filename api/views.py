@@ -38,7 +38,6 @@ class RegisterView(APIView):
             created_user = user_serializer.save()
             AppUser.objects.create(user=created_user, color=random.randint(1,25))
             return Response(user_serializer.data, status=status.HTTP_201_CREATED)
-        print(user_serializer.errors)
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
