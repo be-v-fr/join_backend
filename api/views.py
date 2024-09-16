@@ -1,4 +1,6 @@
+import random
 from django.shortcuts import render
+from django.contrib.auth.models import User
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
@@ -32,11 +34,12 @@ class RegisterView(APIView):
     
     
     def post(self, request, format=None):
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        user_serializer = UserSerializer(data=request.data)
+        if user_serializer.is_valid(raise_exception=True):
+            created_user = user_serializer.save()
+            AppUser.objects.create(user=created_user, color=random.randint(1,25))
+            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TasksView(APIView):
