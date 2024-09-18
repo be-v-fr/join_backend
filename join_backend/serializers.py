@@ -25,7 +25,7 @@ class AppUserSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
         model = AppUser
-        fields = ['id', 'user', 'color']
+        fields = ['id', 'user', 'color_id']
 
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
@@ -48,5 +48,5 @@ class CustomContactSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), default=UserSerializer())
     class Meta:
         model = CustomContact
-        fields = ['id', 'user', 'name', 'email', 'color']
+        fields = ['id', 'user', 'name', 'email', 'color_id']
         

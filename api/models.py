@@ -45,7 +45,7 @@ class Subtask(models.Model):
     
 class AppUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
-    color = models.PositiveSmallIntegerField(default=0, validators=[MaxValueValidator(24)])
+    color_id = models.PositiveSmallIntegerField(validators=[MaxValueValidator(24)], default=None, blank=True, null=True)
     
         
     def __str__(self):
@@ -55,7 +55,7 @@ class AppUser(models.Model):
 class CustomContact(models.Model):
     name = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
-    color = models.PositiveSmallIntegerField(default=0, validators=[MaxValueValidator(24)])
+    color_id = models.PositiveSmallIntegerField(validators=[MaxValueValidator(24)], default=None, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_set', default=None, blank=True, null=True)
     
     
