@@ -20,11 +20,12 @@ class LoginView(ObtainAuthToken):
             user = serializer.validated_data['user']
             token, created = Token.objects.get_or_create(user=user)
             app_user = AppUser.objects.get(user=user)
-            app_user_serializer = AppUserSerializer(app_user)
-            return Response({
-                'token': token.key,
-                'appUser': app_user_serializer.data,
-            })
+            if app_user:
+                app_user_serializer = AppUserSerializer(app_user)
+                return Response({
+                    'token': token.key,
+                    'appUser': app_user_serializer.data,
+                })
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
