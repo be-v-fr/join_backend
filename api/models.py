@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.validators import MaxValueValidator
 import datetime
-from .utils import PRIORITY, CATEGORY, STATUS_ALL, STATUS_BASE, PERSON_COLORS
+from .utils import PRIORITY, CATEGORY, STATUS_ALL, STATUS_BASE
 
 
 class Task(models.Model):
