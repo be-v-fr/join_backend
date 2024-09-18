@@ -1,7 +1,7 @@
-import random
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.core.validators import MaxValueValidator
 import datetime
 from .utils import PRIORITY, CATEGORY, STATUS_ALL, STATUS_BASE, PERSON_COLORS
 
@@ -45,10 +45,7 @@ class Subtask(models.Model):
     
 class AppUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
-    color = models.PositiveSmallIntegerField(
-        choices=PERSON_COLORS,
-        default=1,
-    )
+    color = models.PositiveSmallIntegerField(default=0, validators=[MaxValueValidator(24)])
     
         
     def __str__(self):
@@ -58,10 +55,7 @@ class AppUser(models.Model):
 class CustomContact(models.Model):
     name = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
-    color = models.PositiveSmallIntegerField(
-        choices=PERSON_COLORS,
-        default=1,
-    )
+    color = models.PositiveSmallIntegerField(default=0, validators=[MaxValueValidator(24)])
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_set', default=None, blank=True, null=True)
     
     
