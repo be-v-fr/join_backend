@@ -45,8 +45,8 @@ class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
         
         
 class CustomContactSerializer(serializers.HyperlinkedModelSerializer):
-    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), default=UserSerializer())
+    app_user = serializers.PrimaryKeyRelatedField(queryset=AppUser.objects.all(), default=AppUserSerializer())
     class Meta:
         model = CustomContact
-        fields = ['id', 'user', 'name', 'email', 'color_id']
+        fields = ['id', 'app_user', 'name', 'email', 'phone', 'color_id']
         

@@ -157,7 +157,9 @@ class ContactsView(APIView):
     def post(self, request, format=None):
         serializer = CustomContactSerializer(data=request.data)
         if serializer.is_valid():
-            if int(request.data['user']) != request.user.id:
+            app_user_id = int(request.data['user'])
+            app_user = AppUser.objects.get(id=app_user_id)
+            if app_user.user.id != request.user.id:
                 return Response(status=status.HTTP_403_FORBIDDEN)                
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -167,7 +169,7 @@ class ContactsView(APIView):
     def put(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         custom_contact = CustomContact.objects.get(id=pk)
-        if custom_contact.user != request.user:
+        if custom_contact.app_user.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
         serializer = CustomContactSerializer(custom_contact, data=request.data)
         if serializer.is_valid():
@@ -181,7 +183,7 @@ class ContactsView(APIView):
         if not pk:
             return Response(status=status.HTTP_400_BAD_REQUEST)
         custom_contact = CustomContact.objects.get(id=pk)
-        if custom_contact.user != request.user:
+        if custom_contact.app_user.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
         custom_contact.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
