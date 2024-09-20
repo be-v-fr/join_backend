@@ -149,7 +149,9 @@ class ContactsView(APIView):
     
     
     def get(self, request, format=None):
-        custom_contacts = CustomContact.objects.filter(user=request.user)
+        app_user = AppUser.objects.get(user=request.user)
+        custom_contacts = CustomContact.objects.filter(app_user=app_user)
+        print(custom_contacts)
         serializer = CustomContactSerializer(custom_contacts, many=True)
         return Response(serializer.data)
 
