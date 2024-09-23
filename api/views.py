@@ -55,11 +55,20 @@ class TasksView(APIView):
 
 
     def post(self, request, format=None):
-        serializer = TaskSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        task_serializer = TaskSerializer(data=request.data)
+        if task_serializer.is_valid():
+            subtasks_data = request.data['subtasks']
+            created_task = task_serializer.save()
+            for subtask_data in subtasks_data:
+                subtask_data['task'] = created_task.id
+                print(subtask_data)
+                subtask_serializer = SubtaskSerializer(data=subtask_data)
+                if subtask_serializer.is_valid():
+                    subtask_serializer.save()
+                else:
+                    return Response(subtask_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(task_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
     def put(self, request, *args, **kwargs):

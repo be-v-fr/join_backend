@@ -34,7 +34,7 @@ class Task(models.Model):
     
     
 class Subtask(models.Model):
-    title = models.CharField(max_length=30, default=None, blank=True, null=True)
+    name = models.CharField(max_length=30, default=None, blank=True, null=True)
     status = models.CharField(
         max_length=32,
         choices=STATUS_BASE,
@@ -44,7 +44,7 @@ class Subtask(models.Model):
     
     
     def __str__(self):
-        return f"({self.id}) {self.title}"
+        return f"({self.id}) {self.name}"
     
     
 class AppUser(models.Model):

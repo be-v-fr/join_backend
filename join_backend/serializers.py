@@ -41,7 +41,7 @@ class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
     task = serializers.PrimaryKeyRelatedField(queryset=Task.objects.all())
     class Meta:
         model = Subtask
-        fields = ['id', 'title', 'status', 'task']
+        fields = ['id', 'name', 'status', 'task']
         
         
 class CustomContactSerializer(serializers.HyperlinkedModelSerializer):
