@@ -1,36 +1,38 @@
 from django.utils.translation import gettext as _
 
 ##### PRIO #####
-URGENT = 1
-MEDIUM = 2
-LOW = 3
+NULL = 'null'
+URGENT = 'Urgent'
+MEDIUM = 'Medium'
+LOW = 'Low'
 
 PRIORITY = (
-(URGENT, _('urgent')),
-(MEDIUM, _('medium')),
-(LOW, _('low')),
+(NULL, _('null')),
+(URGENT, _('Urgent')),
+(MEDIUM, _('Medium')),
+(LOW, _('Low')),
 )
 
 ##### CATEGORY #####
-TECHNICAL_TASK = 1
-USER_STORY = 2
+TECHNICAL_TASK = 'Technical Task'
+USER_STORY = 'User Story'
 
 CATEGORY = (
-(TECHNICAL_TASK, _('technical task')),
-(USER_STORY, _('user story')),
+(TECHNICAL_TASK, _('Technical Task')),
+(USER_STORY, _('User Story')),
 )
 
 ##### STATUS #####
-TO_DO = 1
-IN_PROGRESS = 2
-AWAIT_FEEDBACK = 3
-DONE = 4
+TO_DO = 'To do'
+IN_PROGRESS = 'In progress'
+AWAIT_FEEDBACK = 'Await feedback'
+DONE = 'Done'
 
 STATUS_ALL = (
-(TO_DO, _('to do')),
-(IN_PROGRESS, _('in progress')),
-(AWAIT_FEEDBACK, _('await feedback')),
-(DONE, _('done')),
+(TO_DO, _('To do')),
+(IN_PROGRESS, _('In progress')),
+(AWAIT_FEEDBACK, _('Await feedback')),
+(DONE, _('Done')),
 )
 
 STATUS_BASE = (STATUS_ALL[0], STATUS_ALL[-1])

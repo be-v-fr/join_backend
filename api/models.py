@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.validators import MaxValueValidator
 import datetime
-from .utils import PRIORITY, CATEGORY, STATUS_ALL, STATUS_BASE
+from .utils import PRIORITY, MEDIUM, CATEGORY, TECHNICAL_TASK, STATUS_ALL, STATUS_BASE, TO_DO
 
 
 class Task(models.Model):
@@ -12,17 +12,20 @@ class Task(models.Model):
     assigned_to = models.ManyToManyField(User, default=None, blank=True)
     created_at = models.DateField(default=datetime.date.today)
     due = models.DateField(default=datetime.date.today)
-    prio = models.PositiveSmallIntegerField(
+    prio = models.CharField(
+        max_length=32,
         choices=PRIORITY,
-        default=1,
+        default=MEDIUM,
     )
-    category = models.PositiveSmallIntegerField(
+    category = models.CharField(
+        max_length=32,
         choices=CATEGORY,
-        default=1,
+        default=TECHNICAL_TASK,
     )
-    status = models.PositiveSmallIntegerField(
+    status = models.CharField(
+        max_length=32,
         choices=STATUS_ALL,
-        default=1,
+        default=TO_DO,
     )
     
     
@@ -32,9 +35,10 @@ class Task(models.Model):
     
 class Subtask(models.Model):
     title = models.CharField(max_length=30, default=None, blank=True, null=True)
-    status = models.PositiveSmallIntegerField(
+    status = models.CharField(
+        max_length=32,
         choices=STATUS_BASE,
-        default=1,
+        default=TO_DO,
     )
     task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='task_set', default=None, blank=True, null=True)
     
