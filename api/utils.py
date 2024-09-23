@@ -1,7 +1,7 @@
 from django.utils.translation import gettext as _
 
 ##### PRIO #####
-NULL = 'null'
+NULL = ''
 URGENT = 'Urgent'
 MEDIUM = 'Medium'
 LOW = 'Low'

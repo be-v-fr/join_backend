@@ -30,7 +30,7 @@ class AppUserSerializer(serializers.HyperlinkedModelSerializer):
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     # assigned_to = UserSerializer(read_only=True, many=True)
-    assigned_to = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), default=UserSerializer(), many=True)
+    assigned_to = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
     class Meta:
         model = Task
         fields = ['id', 'title', 'description', 'assigned_to', 'created_at', 'due', 'prio', 'category', 'status']
@@ -38,7 +38,7 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         
 class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
     # task_id = serializers.IntegerField(source='task.id')
-    task = serializers.PrimaryKeyRelatedField(queryset=Task.objects.all(), default=TaskSerializer())
+    task = serializers.PrimaryKeyRelatedField(queryset=Task.objects.all())
     class Meta:
         model = Subtask
         fields = ['id', 'title', 'status', 'task']

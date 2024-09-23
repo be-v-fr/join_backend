@@ -8,7 +8,7 @@ from .utils import PRIORITY, MEDIUM, CATEGORY, TECHNICAL_TASK, STATUS_ALL, STATU
 
 class Task(models.Model):
     title = models.CharField(max_length=30)
-    description = models.CharField(max_length=500)
+    description = models.CharField(max_length=500, blank=True, default='')
     assigned_to = models.ManyToManyField(User, default=None, blank=True)
     created_at = models.DateField(default=datetime.date.today)
     due = models.DateField(default=datetime.date.today)
