@@ -7,7 +7,7 @@ MEDIUM = 'Medium'
 LOW = 'Low'
 
 PRIORITY = (
-(NULL, _('null')),
+(NULL, _('')),
 (URGENT, _('Urgent')),
 (MEDIUM, _('Medium')),
 (LOW, _('Low')),
