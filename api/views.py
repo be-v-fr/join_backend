@@ -61,7 +61,6 @@ class TasksView(APIView):
             created_task = task_serializer.save()
             for subtask_data in subtasks_data:
                 subtask_data['task'] = created_task.id
-                print(subtask_data)
                 subtask_serializer = SubtaskSerializer(data=subtask_data)
                 if subtask_serializer.is_valid():
                     subtask_serializer.save()
@@ -77,6 +76,14 @@ class TasksView(APIView):
         serializer = TaskSerializer(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            for subtask_data in request.data['subtasks']:
+                if subtask_data.get('id'):
+                    subtask = Subtask.objects.get(id=subtask_data['id'])
+                    subtask_serializer = SubtaskSerializer(subtask, data=subtask_data)
+                    if subtask_serializer.is_valid():
+                        subtask_serializer.save()
+                    else:
+                        return Response(subtask_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
