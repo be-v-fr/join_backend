@@ -6,10 +6,19 @@ import datetime
 from .utils import PRIORITY, MEDIUM, CATEGORY, TECHNICAL_TASK, STATUS_ALL, STATUS_BASE, TO_DO
 
 
+class AppUser(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    color_id = models.PositiveSmallIntegerField(validators=[MaxValueValidator(24)], default=None, blank=True, null=True)
+    
+        
+    def __str__(self):
+        return f"({self.id}) {self.user.username}"
+
+
 class Task(models.Model):
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=500, blank=True, default='')
-    assigned_to = models.ManyToManyField(User, default=None, blank=True)
+    assigned_to = models.ManyToManyField(AppUser, default=None, blank=True)
     created_at = models.DateField(default=datetime.date.today)
     due = models.DateField(default=datetime.date.today)
     prio = models.CharField(
@@ -45,15 +54,6 @@ class Subtask(models.Model):
     
     def __str__(self):
         return f"({self.id}) {self.name}"
-    
-    
-class AppUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
-    color_id = models.PositiveSmallIntegerField(validators=[MaxValueValidator(24)], default=None, blank=True, null=True)
-    
-        
-    def __str__(self):
-        return f"({self.id}) {self.user.username}"
     
     
 class CustomContact(models.Model):

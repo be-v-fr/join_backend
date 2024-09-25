@@ -56,9 +56,11 @@ class TasksView(APIView):
 
     def post(self, request, format=None):
         task_serializer = TaskSerializer(data=request.data)
+        print('SERIALIZER 1', task_serializer)
         if task_serializer.is_valid():
             subtasks_data = request.data['subtasks']
             created_task = task_serializer.save()
+            print('TASK CREATED 2', created_task)
             for subtask_data in subtasks_data:
                 subtask_data['task'] = created_task.id
                 subtask_serializer = SubtaskSerializer(data=subtask_data)

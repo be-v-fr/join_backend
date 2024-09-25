@@ -30,7 +30,25 @@ class AppUserSerializer(serializers.HyperlinkedModelSerializer):
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
     # assigned_to = UserSerializer(read_only=True, many=True)
-    assigned_to = serializers.PrimaryKeyRelatedField(queryset=User.objects.all(), many=True)
+    assigned_to = serializers.PrimaryKeyRelatedField(queryset=AppUser.objects.all(), many=True)
+    
+    
+    def create(self, validated_data):
+        app_users_ids = self.initial_data['assigned_to']
+        task = Task.objects.create(
+            title=validated_data['title'],
+            description=validated_data['description'],
+            due=validated_data['due'],
+            prio=validated_data['prio'],
+            category=validated_data['category'],
+            status=validated_data['status'],
+        )
+        print('TASK CREATED')
+        for app_user_id in app_users_ids:
+            task.assigned_to.add(AppUser.objects.get(id=app_user_id))
+        print('USERS ASSIGNED', task.assigned_to)
+        return task
+    
     class Meta:
         model = Task
         fields = ['id', 'title', 'description', 'assigned_to', 'created_at', 'due', 'prio', 'category', 'status']
