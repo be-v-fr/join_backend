@@ -43,10 +43,8 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
             category=validated_data['category'],
             status=validated_data['status'],
         )
-        print('TASK CREATED')
         for app_user_id in app_users_ids:
             task.assigned_to.add(AppUser.objects.get(id=app_user_id))
-        print('USERS ASSIGNED', task.assigned_to)
         return task
     
     class Meta:
