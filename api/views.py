@@ -196,10 +196,11 @@ class ContactsView(APIView):
 
     def delete(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
-        if not pk:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-        custom_contact = CustomContact.objects.get(id=pk)
-        if custom_contact.app_user.user != request.user:
-            return Response(status=status.HTTP_403_FORBIDDEN)
-        custom_contact.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if pk:
+            custom_contact = CustomContact.objects.get(id=pk)
+            if custom_contact.app_user.user != request.user:
+                return Response(status=status.HTTP_403_FORBIDDEN)
+            custom_contact.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
