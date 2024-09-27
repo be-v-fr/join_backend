@@ -56,11 +56,9 @@ class TasksView(APIView):
 
     def post(self, request, format=None):
         task_serializer = TaskSerializer(data=request.data)
-        print('SERIALIZER 1', task_serializer)
         if task_serializer.is_valid():
             subtasks_data = request.data['subtasks']
             created_task = task_serializer.save()
-            print('TASK CREATED 2', created_task)
             for subtask_data in subtasks_data:
                 subtask_data['task'] = created_task.id
                 subtask_serializer = SubtaskSerializer(data=subtask_data)
@@ -174,12 +172,10 @@ class ContactsView(APIView):
 
 
     def post(self, request, format=None):
+        app_user = AppUser.objects.get(user=request.user)
+        request.data['app_user'] = app_user.id
         serializer = CustomContactSerializer(data=request.data)
         if serializer.is_valid():
-            app_user_id = int(request.data['user'])
-            app_user = AppUser.objects.get(id=app_user_id)
-            if app_user.user.id != request.user.id:
-                return Response(status=status.HTTP_403_FORBIDDEN)                
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

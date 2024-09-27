@@ -1,3 +1,4 @@
+import random
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from api.models import AppUser, CustomContact, Task, Subtask
@@ -62,6 +63,7 @@ class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
         
 class CustomContactSerializer(serializers.HyperlinkedModelSerializer):
     app_user = serializers.PrimaryKeyRelatedField(queryset=AppUser.objects.all(), default=AppUserSerializer())
+    
     class Meta:
         model = CustomContact
         fields = ['id', 'app_user', 'name', 'email', 'phone', 'color_id']
