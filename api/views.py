@@ -186,6 +186,7 @@ class ContactsView(APIView):
         custom_contact = CustomContact.objects.get(id=pk)
         if custom_contact.app_user.user != request.user:
             return Response(status=status.HTTP_403_FORBIDDEN)
+        request.data['app_user'] = custom_contact.app_user.id
         serializer = CustomContactSerializer(custom_contact, data=request.data)
         if serializer.is_valid():
             serializer.save()
