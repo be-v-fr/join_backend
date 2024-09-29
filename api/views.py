@@ -1,4 +1,5 @@
 import random
+from django.http import StreamingHttpResponse
 from django.shortcuts import render
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -7,6 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+import asyncio
+
 
 from api.models import AppUser, CustomContact, Task, Subtask
 from join_backend.serializers import AppUserSerializer, CustomContactSerializer, TaskSerializer, SubtaskSerializer, UserSerializer
@@ -203,4 +206,33 @@ class ContactsView(APIView):
             custom_contact.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_400_BAD_REQUEST)
-    
+
+
+async def tasks_stream(request):
+    """
+    Sends server-sent events to the client.
+    """
+    async def event_stream():
+        emojis = ["🚀", "🐎", "🌅", "🦾", "🍇"]
+        i = 0
+        while True:
+            yield f'data: {random.choice(emojis)} {i}\n\n'
+            i += 1
+            await asyncio.sleep(1)
+
+    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+
+
+async def subtasks_stream(request):
+    """
+    Sends server-sent events to the client.
+    """
+    async def event_stream():
+        emojis = ["🚀", "🐎", "🌅", "🦾", "🍇"]
+        i = 0
+        while True:
+            yield f'data: {random.choice(emojis)} {i}\n\n'
+            i += 1
+            await asyncio.sleep(1)
+
+    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
