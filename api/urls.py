@@ -1,5 +1,6 @@
 from django.urls import include, path
-from api.views import LoginView, RegisterView, SubtasksView, TasksView, UsersView, CurrentUserView, ContactsView, tasks_stream, subtasks_stream
+from api.views import *
+
 
 urlpatterns = [
     path('login', LoginView.as_view()),
@@ -12,6 +13,7 @@ urlpatterns = [
     path('subtasks/stream/', subtasks_stream, name='subtasks_stream'),
     path('users', UsersView.as_view()),
     path('users/current', CurrentUserView.as_view()),
+    path('users/stream/', users_stream, name='users_stream'),
     path('contacts', ContactsView.as_view()),
     path('contacts/<int:pk>', ContactsView.as_view()),
 ]

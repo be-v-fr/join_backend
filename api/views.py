@@ -214,6 +214,26 @@ def print_async(obj):
     return print(obj)
 
 
+async def users_stream(request):
+    """
+    Sends server-sent events to the client.
+    """
+    @sync_to_async
+    def get_users_data():
+        return AppUserSerializer(AppUser.objects.all(), many=True).data
+
+    
+    async def event_stream():
+        while True:
+            users_data_before = await get_users_data()
+            await asyncio.sleep(10)
+            users_data_after = await get_users_data()
+            if users_data_after != users_data_before:
+                yield f'data: \n\n'
+
+    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+
+
 async def tasks_stream(request):
     """
     Sends server-sent events to the client.
