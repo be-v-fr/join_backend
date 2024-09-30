@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from asgiref.sync import sync_to_async
 import asyncio
 
 
@@ -208,17 +209,27 @@ class ContactsView(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+@sync_to_async
+def print_async(obj):
+    return print(obj)
+
+
 async def tasks_stream(request):
     """
     Sends server-sent events to the client.
     """
+    @sync_to_async
+    def get_tasks_data():
+        return TaskSerializer(Task.objects.all(), many=True).data
+
+    
     async def event_stream():
-        emojis = ["🚀", "🐎", "🌅", "🦾", "🍇"]
-        i = 0
         while True:
-            yield f'data: {random.choice(emojis)} {i}\n\n'
-            i += 1
+            tasks_data_before = await get_tasks_data()
             await asyncio.sleep(1)
+            tasks_data_after = await get_tasks_data()
+            if tasks_data_after != tasks_data_before:
+                yield f'data: \n\n'
 
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
 
@@ -227,12 +238,17 @@ async def subtasks_stream(request):
     """
     Sends server-sent events to the client.
     """
+    @sync_to_async
+    def get_subtasks_data():
+        return SubtaskSerializer(Subtask.objects.all(), many=True).data
+
+    
     async def event_stream():
-        emojis = ["🚀", "🐎", "🌅", "🦾", "🍇"]
-        i = 0
         while True:
-            yield f'data: {random.choice(emojis)} {i}\n\n'
-            i += 1
+            subtasks_data_before = await get_subtasks_data()
             await asyncio.sleep(1)
+            subtasks_data_after = await get_subtasks_data()
+            if subtasks_data_after != subtasks_data_before:
+                yield f'data: \n\n'
 
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
