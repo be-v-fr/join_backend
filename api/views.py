@@ -8,13 +8,16 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from asgiref.sync import sync_to_async
 import asyncio
 
 
 from api.models import AppUser, CustomContact, Task, Subtask
 from join_backend.serializers import AppUserSerializer, CustomContactSerializer, TaskSerializer, SubtaskSerializer, UserSerializer
 
+
+tasks_changed = False
+subtasks_changed = False
+users_changed = False
 
 class LoginView(ObtainAuthToken):
     def post(self, request, *args, **kwargs):
@@ -39,10 +42,12 @@ class RegisterView(APIView):
     
     
     def post(self, request, format=None):
+        global users_changed
         user_serializer = UserSerializer(data=request.data)
         if user_serializer.is_valid(raise_exception=True):
             created_user = user_serializer.save()
             AppUser.objects.create(user=created_user, color_id=random.randint(0,24))
+            users_changed = True
             return Response(user_serializer.data, status=status.HTTP_201_CREATED)
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -59,10 +64,13 @@ class TasksView(APIView):
 
 
     def post(self, request, format=None):
+        global tasks_changed
+        global subtasks_changed
         task_serializer = TaskSerializer(data=request.data)
         if task_serializer.is_valid():
             subtasks_data = request.data['subtasks']
             created_task = task_serializer.save()
+            tasks_changed = True
             for subtask_data in subtasks_data:
                 subtask_data['task'] = created_task.id
                 subtask_serializer = SubtaskSerializer(data=subtask_data)
@@ -70,16 +78,20 @@ class TasksView(APIView):
                     subtask_serializer.save()
                 else:
                     return Response(subtask_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            subtasks_changed = True
             return Response(task_serializer.data, status=status.HTTP_201_CREATED)
         return Response(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 
     def put(self, request, *args, **kwargs):
+        global tasks_changed
+        global subtasks_changed
         pk = kwargs.get('pk')
         task = Task.objects.get(id=pk)
         serializer = TaskSerializer(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            tasks_changed = True
             for subtask_data in request.data['subtasks']:
                 if subtask_data.get('id'):
                     subtask = Subtask.objects.get(id=subtask_data['id'])
@@ -88,16 +100,19 @@ class TasksView(APIView):
                         subtask_serializer.save()
                     else:
                         return Response(subtask_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            subtasks_changed = True
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
     def delete(self, request, *args, **kwargs):
+        global tasks_changed
         pk = kwargs.get('pk')
         if pk:
             task = Task.objects.get(id=pk)
             task.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+        tasks_changed = True
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
     
@@ -113,28 +128,34 @@ class SubtasksView(APIView):
 
 
     def post(self, request, format=None):
+        global subtasks_changed
         serializer = SubtaskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            subtasks_changed = True
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
     def put(self, request, *args, **kwargs):
+        global subtasks_changed
         pk = kwargs.get('pk')
         subtask = Subtask.objects.get(id=pk)
         serializer = SubtaskSerializer(subtask, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            subtasks_changed = True
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
     def delete(self, request, *args, **kwargs):
+        global subtasks_changed
         pk = kwargs.get('pk')
         if pk:
             subtask = Subtask.objects.get(id=pk)
             subtask.delete()
+            subtasks_changed = True
             return Response(status=status.HTTP_204_NO_CONTENT)
         return Response(status=status.HTTP_400_BAD_REQUEST)
     
@@ -209,27 +230,17 @@ class ContactsView(APIView):
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-@sync_to_async
-def print_async(obj):
-    return print(obj)
-
-
 async def users_stream(request):
     """
     Sends server-sent events to the client.
     """
-    @sync_to_async
-    def get_users_data():
-        return AppUserSerializer(AppUser.objects.all(), many=True).data
-
-    
     async def event_stream():
+        global users_changed
         while True:
-            users_data_before = await get_users_data()
-            await asyncio.sleep(10)
-            users_data_after = await get_users_data()
-            if users_data_after != users_data_before:
+            await asyncio.sleep(0.1)
+            if users_changed:
                 yield f'data: \n\n'
+                users_changed = False
 
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
 
@@ -238,18 +249,13 @@ async def tasks_stream(request):
     """
     Sends server-sent events to the client.
     """
-    @sync_to_async
-    def get_tasks_data():
-        return TaskSerializer(Task.objects.all(), many=True).data
-
-    
     async def event_stream():
+        global tasks_changed
         while True:
-            tasks_data_before = await get_tasks_data()
-            await asyncio.sleep(1)
-            tasks_data_after = await get_tasks_data()
-            if tasks_data_after != tasks_data_before:
+            await asyncio.sleep(0.1)
+            if tasks_changed:
                 yield f'data: \n\n'
+                tasks_changed = False
 
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
 
@@ -258,17 +264,12 @@ async def subtasks_stream(request):
     """
     Sends server-sent events to the client.
     """
-    @sync_to_async
-    def get_subtasks_data():
-        return SubtaskSerializer(Subtask.objects.all(), many=True).data
-
-    
     async def event_stream():
+        global subtasks_changed
         while True:
-            subtasks_data_before = await get_subtasks_data()
-            await asyncio.sleep(1)
-            subtasks_data_after = await get_subtasks_data()
-            if subtasks_data_after != subtasks_data_before:
+            await asyncio.sleep(0.1)
+            if subtasks_changed:
                 yield f'data: \n\n'
+                subtasks_changed = False
 
     return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
