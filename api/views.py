@@ -1,5 +1,6 @@
 from django.http import StreamingHttpResponse
 from django.shortcuts import render
+from django.contrib.auth.models import User
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
@@ -34,6 +35,26 @@ class LoginView(ObtainAuthToken):
                     'appUser': app_user_serializer.data,
                 })
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+class GuestLoginView(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        username = request.data['username']
+        if len(username) > 0:
+            user = User.objects.get(username=username)
+            if user and len(user.email) == 0:
+                token, created = Token.objects.get_or_create(user=user)
+                return Response({
+                    'token': token.key,
+                })
+        created_guest = User.objects.create(username='temp', password='guestlogin')
+        token = Token.objects.create(user=created_guest)
+        created_guest.username = token.key
+        created_guest.save()
+        return Response({
+            'token': token.key
+        })
+
 
 
 class RegisterView(APIView):
