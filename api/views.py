@@ -198,10 +198,15 @@ class CurrentUserView(APIView):
     
     
     def get(self, request, format=None):
-        user = AppUser.objects.get(user=request.user)
-        if(user):
-            serializer = AppUserSerializer(user)
-            return Response(serializer.data)
+        auth_user = User.objects.get(username=request.user.username)
+        if auth_user:
+            if len(auth_user.email) > 0:
+                app_user = AppUser.objects.get(user=auth_user)
+                serializer = AppUserSerializer(app_user)
+                return Response(serializer.data)
+            else:
+                serializer = UserSerializer(auth_user)
+                return Response(serializer.data)
         return Response(status=status.HTTP_404_NOT_FOUND)   
     
     
