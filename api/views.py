@@ -44,17 +44,24 @@ class GuestLoginView(ObtainAuthToken):
             user = User.objects.get(username=username)
             if user and len(user.email) == 0:
                 token, created = Token.objects.get_or_create(user=user)
-                return Response({
-                    'token': token.key,
-                })
+                app_user = AppUser.objects.get(user=user)
+                if app_user:
+                    app_user_serializer = AppUserSerializer(app_user)
+                    return Response({
+                        'token': token.key,
+                        'appUser': app_user_serializer.data,
+                    })
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         created_guest = User.objects.create(username='temp', password='guestlogin')
         token = Token.objects.create(user=created_guest)
         created_guest.username = token.key
         created_guest.save()
+        created_app_user = AppUser.objects.create(user=created_guest)
+        app_user_serializer = AppUserSerializer(created_app_user)
         return Response({
-            'token': token.key
+            'token': token.key,
+            'appUser': app_user_serializer.data,
         })
-
 
 
 class RegisterView(APIView):
@@ -199,15 +206,9 @@ class CurrentUserView(APIView):
     
     def get(self, request, format=None):
         auth_user = User.objects.get(username=request.user.username)
-        if auth_user:
-            if len(auth_user.email) > 0:
-                app_user = AppUser.objects.get(user=auth_user)
-                serializer = AppUserSerializer(app_user)
-                return Response(serializer.data)
-            else:
-                serializer = UserSerializer(auth_user)
-                return Response(serializer.data)
-        return Response(status=status.HTTP_404_NOT_FOUND)   
+        app_user = AppUser.objects.get(user=auth_user)
+        serializer = AppUserSerializer(app_user)
+        return Response(serializer.data) 
     
     
 class ContactsView(APIView):
