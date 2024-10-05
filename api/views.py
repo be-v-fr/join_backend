@@ -72,12 +72,19 @@ class RegisterView(APIView):
     def post(self, request, format=None):
         global users_changed
         user_serializer = UserSerializer(data=request.data)
-        if user_serializer.is_valid(raise_exception=True):
-            created_user = user_serializer.save()
-            AppUser.objects.create(user=created_user, color_id=random.randint(0,24))
-            users_changed = True
-            return Response(user_serializer.data, status=status.HTTP_201_CREATED)
-        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user_by_email = User.objects.get(email__exact=request.data['email'], many=True)
+            if user_by_email:
+                return Response(
+                    {'email': 'This email is already registered.'},
+                    status=status.HTTP_400_BAD_REQUEST)               
+        except:
+            if user_serializer.is_valid(raise_exception=True):
+                created_user = user_serializer.save()
+                AppUser.objects.create(user=created_user, color_id=random.randint(0,24))
+                users_changed = True
+                return Response(user_serializer.data, status=status.HTTP_201_CREATED)
+            return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class TasksView(APIView):
