@@ -1,38 +1,21 @@
-from django.utils.translation import gettext as _
+from django.contrib.auth.models import User
+from join_backend.serializers import AppUserSerializer
+from rest_framework.response import Response
+from rest_framework import status
 
-##### PRIO #####
-NULL = ''
-URGENT = 'Urgent'
-MEDIUM = 'Medium'
-LOW = 'Low'
 
-PRIORITY = (
-(NULL, _('')),
-(URGENT, _('Urgent')),
-(MEDIUM, _('Medium')),
-(LOW, _('Low')),
-)
-
-##### CATEGORY #####
-TECHNICAL_TASK = 'Technical Task'
-USER_STORY = 'User Story'
-
-CATEGORY = (
-(TECHNICAL_TASK, _('Technical Task')),
-(USER_STORY, _('User Story')),
-)
-
-##### STATUS #####
-TO_DO = 'To do'
-IN_PROGRESS = 'In progress'
-AWAIT_FEEDBACK = 'Await feedback'
-DONE = 'Done'
-
-STATUS_ALL = (
-(TO_DO, _('To do')),
-(IN_PROGRESS, _('In progress')),
-(AWAIT_FEEDBACK, _('Await feedback')),
-(DONE, _('Done')),
-)
-
-STATUS_BASE = (STATUS_ALL[0], STATUS_ALL[-1])
+def get_login_response(app_user, token):
+    app_user_serializer = AppUserSerializer(app_user)
+    return Response({
+        'token': token.key,
+        'appUser': app_user_serializer.data,
+    })
+    
+    
+def check_email_availability(email):
+    user_by_email = User.objects.get(email__exact=email, many=True)
+    if user_by_email:
+        return Response(
+            {'email': 'This email is already registered.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )

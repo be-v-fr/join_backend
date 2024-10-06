@@ -1,5 +1,4 @@
 from django.http import StreamingHttpResponse
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -8,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from .utils import get_login_response, check_email_availability
 import random
 import asyncio
 
@@ -29,39 +29,31 @@ class LoginView(ObtainAuthToken):
             token, created = Token.objects.get_or_create(user=user)
             app_user = AppUser.objects.get(user=user)
             if app_user:
-                app_user_serializer = AppUserSerializer(app_user)
-                return Response({
-                    'token': token.key,
-                    'appUser': app_user_serializer.data,
-                })
+                return get_login_response(app_user=app_user, token=token)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
 class GuestLoginView(ObtainAuthToken):
+    def login_existing_guest(self, username):
+        user = User.objects.get(username=username)
+        if user and len(user.email) == 0:
+            token, created = Token.objects.get_or_create(user=user)
+            app_user = AppUser.objects.get(user=user)
+            if app_user:
+                return get_login_response(app_user=app_user, token=token)
+            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)        
+
+    
     def post(self, request, *args, **kwargs):
         username = request.data['username']
         if len(username) > 0:
-            user = User.objects.get(username=username)
-            if user and len(user.email) == 0:
-                token, created = Token.objects.get_or_create(user=user)
-                app_user = AppUser.objects.get(user=user)
-                if app_user:
-                    app_user_serializer = AppUserSerializer(app_user)
-                    return Response({
-                        'token': token.key,
-                        'appUser': app_user_serializer.data,
-                    })
-                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return self.login_existing_guest(username)
         created_guest = User.objects.create(username='temp', password='guestlogin')
         token = Token.objects.create(user=created_guest)
         created_guest.username = token.key
         created_guest.save()
         created_app_user = AppUser.objects.create(user=created_guest)
-        app_user_serializer = AppUserSerializer(created_app_user)
-        return Response({
-            'token': token.key,
-            'appUser': app_user_serializer.data,
-        })
+        return get_login_response(app_user=created_app_user, token=token)
 
 
 class RegisterView(APIView):
@@ -73,11 +65,8 @@ class RegisterView(APIView):
         global users_changed
         user_serializer = UserSerializer(data=request.data)
         try:
-            user_by_email = User.objects.get(email__exact=request.data['email'], many=True)
-            if user_by_email:
-                return Response(
-                    {'email': 'This email is already registered.'},
-                    status=status.HTTP_400_BAD_REQUEST)               
+            email_error_response = check_email_availability(request.data['email'])
+            return email_error_response      
         except:
             if user_serializer.is_valid(raise_exception=True):
                 created_user = user_serializer.save()
@@ -96,48 +85,57 @@ class TasksView(APIView):
         tasks = Task.objects.all()
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
+    
+    
+    def post_task_with_subtasks(self, task_serializer, subtasks_data):
+        global tasks_changed
+        global subtasks_changed
+        created_task = task_serializer.save()
+        tasks_changed = True
+        for subtask_data in subtasks_data:
+            subtask_data['task'] = created_task.id
+            subtask_serializer = SubtaskSerializer(data=subtask_data)
+            if subtask_serializer.is_valid():
+                subtask_serializer.save()
+            else:
+                return Response(subtask_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            subtasks_changed = True
+        return Response(task_serializer.data, status=status.HTTP_201_CREATED)        
 
 
     def post(self, request, format=None):
-        global tasks_changed
-        global subtasks_changed
         task_serializer = TaskSerializer(data=request.data)
         if task_serializer.is_valid():
-            subtasks_data = request.data['subtasks']
-            created_task = task_serializer.save()
-            tasks_changed = True
-            for subtask_data in subtasks_data:
-                subtask_data['task'] = created_task.id
-                subtask_serializer = SubtaskSerializer(data=subtask_data)
+            post_response = self.post_task_with_subtasks(task_serializer, request.data['subtasks'])
+            return post_response
+        return Response(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+    def put_task_with_subtasks(task_serializer, subtasks_data):
+        global tasks_changed
+        global subtasks_changed        
+        task_serializer.save()
+        tasks_changed = True
+        for subtask_data in subtasks_data:
+            if subtask_data.get('id'):
+                subtask = Subtask.objects.get(id=subtask_data['id'])
+                subtask_serializer = SubtaskSerializer(subtask, data=subtask_data)
                 if subtask_serializer.is_valid():
                     subtask_serializer.save()
                 else:
                     return Response(subtask_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             subtasks_changed = True
-            return Response(task_serializer.data, status=status.HTTP_201_CREATED)
-        return Response(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+        return Response(task_serializer.data)    
+
 
     def put(self, request, *args, **kwargs):
-        global tasks_changed
-        global subtasks_changed
         pk = kwargs.get('pk')
         task = Task.objects.get(id=pk)
-        serializer = TaskSerializer(task, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            tasks_changed = True
-            for subtask_data in request.data['subtasks']:
-                if subtask_data.get('id'):
-                    subtask = Subtask.objects.get(id=subtask_data['id'])
-                    subtask_serializer = SubtaskSerializer(subtask, data=subtask_data)
-                    if subtask_serializer.is_valid():
-                        subtask_serializer.save()
-                    else:
-                        return Response(subtask_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            subtasks_changed = True
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        task_serializer = TaskSerializer(task, data=request.data)
+        if task_serializer.is_valid():
+            put_response = self.put_task_with_subtasks(task_serializer, request.data['subtasks'])
+            return put_response
+        return Response(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
     def delete(self, request, *args, **kwargs):
