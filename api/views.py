@@ -111,7 +111,7 @@ class TasksView(APIView):
         return Response(task_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     
-    def put_task_with_subtasks(task_serializer, subtasks_data):
+    def put_task_with_subtasks(self, task_serializer, subtasks_data):
         global tasks_changed
         global subtasks_changed        
         task_serializer.save()
