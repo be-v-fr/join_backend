@@ -5,6 +5,10 @@ from rest_framework import status
 
 
 def get_login_response(app_user, token):
+    """
+    Returns the login reponse as is common for a successful login post request.
+    It requires the corresponding AppUser and Token object.
+    """
     app_user_serializer = AppUserSerializer(app_user)
     return Response({
         'token': token.key,
@@ -13,6 +17,10 @@ def get_login_response(app_user, token):
     
     
 def check_email_availability(email):
+    """
+    Checks if an email is already taken in the user database.
+    If the email is taken, it returns a 400 error response.
+    """
     user_by_email = User.objects.get(email__exact=email, many=True)
     if user_by_email:
         return Response(

@@ -7,11 +7,15 @@ from rest_framework.authtoken.models import Token
 from api.models import AppUser, Task, Subtask, CustomContact
 from api.choices import TECHNICAL_TASK
 
-# Create your tests here.
+
 class AuthTests(TestCase):
-    
-    
+    """
+    Test suite for authentication-related actions, including registration, login, and guest login.
+    """
     def setUp(self):
+        """
+        Set up initial data for tests, creating a test user, app user, and token for authentication.
+        """
         self.user = User.objects.create_user(username="testuser", password="testpass")
         self.app_user = AppUser.objects.create(user=self.user)
         self.token = Token.objects.create(user=self.user)
@@ -20,6 +24,9 @@ class AuthTests(TestCase):
         
         
     def test_register_user(self):
+        """
+        Test the user registration process.
+        """
         url = reverse('register')
         data = {
             'username': 'newuser',
@@ -31,6 +38,9 @@ class AuthTests(TestCase):
         
         
     def test_login_user(self):
+        """
+        Test the login process for an existing user.
+        """
         url = reverse('login')
         data = {
             'username': 'testuser',
@@ -42,6 +52,9 @@ class AuthTests(TestCase):
         
         
     def test_guest_login(self):
+        """
+        Test the guest login functionality, allowing anonymous users to log in.
+        """
         url = reverse('login_guest')
         data = {'username': ''}
         response = self.client.post(url, data, format='json')
@@ -50,9 +63,13 @@ class AuthTests(TestCase):
         
         
 class UsersTests(TestCase):
-
-
+    """
+    Test suite for actions related to user retrieval, including getting all users and the current user.
+    """
     def setUp(self):
+        """
+        Set up initial data, including creating a test user, app user, and token.
+        """
         self.user = User.objects.create_user(username="testuser", password="testpass")
         self.app_user = AppUser.objects.create(user=self.user)
         self.token = Token.objects.create(user=self.user)
@@ -61,21 +78,31 @@ class UsersTests(TestCase):
         
         
     def test_users(self):
+        """
+        Test retrieving the list of all users.
+        """
         url = reverse('users')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
     def test_users_current(self):
+        """
+        Test retrieving the current logged-in user.
+        """
         url = reverse('users_current')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class TaskTests(TestCase):
-
-
+    """
+    Test suite for actions related to tasks, including retrieving, creating, updating, and deleting tasks.
+    """
     def setUp(self):
+        """
+        Set up initial data, creating a test user, app user, task, subtask, and token.
+        """
         self.user = User.objects.create_user(username="testuser", password="testpass")
         self.app_user = AppUser.objects.create(user=self.user)
         self.token = Token.objects.create(user=self.user)
@@ -86,6 +113,9 @@ class TaskTests(TestCase):
 
 
     def test_get_tasks(self):
+        """
+        Test retrieving a list of all tasks.
+        """
         url = reverse('tasks')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -93,6 +123,9 @@ class TaskTests(TestCase):
         
         
     def test_create_task_with_subtasks(self):
+        """
+        Test creating a task along with its subtasks.
+        """
         url = reverse('tasks')
         data = {
             "title": "Task 2",
@@ -112,6 +145,9 @@ class TaskTests(TestCase):
         
         
     def test_update_task(self):
+        """
+        Test updating an existing task and its associated subtasks.
+        """
         url = reverse('task', kwargs={'pk': self.task.id})
         data = {
             "id": self.task.id,
@@ -137,6 +173,9 @@ class TaskTests(TestCase):
         
         
     def test_delete_task(self):
+        """
+        Test deleting an existing task.
+        """
         url = reverse('task', kwargs={'pk': self.task.id})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -144,9 +183,13 @@ class TaskTests(TestCase):
 
 
 class SubtaskTests(TestCase):
-    
-    
+    """
+    Test suite for actions related to subtasks, including retrieving, creating, updating, and deleting subtasks.
+    """
     def setUp(self):
+        """
+        Set up initial data, creating a test user, app user, task, subtask, and token.
+        """
         self.user = User.objects.create_user(username="testuser", password="testpass")
         self.app_user = AppUser.objects.create(user=self.user)
         self.token = Token.objects.create(user=self.user)
@@ -157,6 +200,9 @@ class SubtaskTests(TestCase):
 
 
     def test_get_subtasks(self):
+        """
+        Test retrieving a list of all subtasks.
+        """
         url = reverse('subtasks')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -164,6 +210,9 @@ class SubtaskTests(TestCase):
 
 
     def test_create_subtask(self):
+        """
+        Test creating a new subtask.
+        """
         url = reverse('subtasks')
         data = {'name': 'New Subtask', 'task': self.task.id}
         response = self.client.post(url, data, format='json')
@@ -171,6 +220,9 @@ class SubtaskTests(TestCase):
 
 
     def test_update_subtask(self):
+        """
+        Test updating an existing subtask.
+        """
         url = reverse('subtask', kwargs={'pk': self.subtask.id})
         data = {'name': 'Updated Subtask', 'task': self.task.id}
         response = self.client.put(url, data, format='json')
@@ -180,6 +232,9 @@ class SubtaskTests(TestCase):
 
 
     def test_delete_subtask(self):
+        """
+        Test deleting an existing subtask.
+        """
         url = reverse('subtask', kwargs={'pk': self.subtask.id})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
@@ -187,9 +242,13 @@ class SubtaskTests(TestCase):
 
 
 class ContactTests(TestCase):
-
-
+    """
+    Test suite for actions related to contacts, including creating, retrieving, updating, and deleting contacts.
+    """
     def setUp(self):
+        """
+        Set up initial data, including creating a test user, app user, and token.
+        """
         self.user = User.objects.create_user(username="testuser", password="testpass")
         self.app_user = AppUser.objects.create(user=self.user)
         self.token = Token.objects.create(user=self.user)
@@ -198,6 +257,9 @@ class ContactTests(TestCase):
 
 
     def test_create_contact(self):
+        """
+        Test creating a new contact.
+        """
         url = reverse('contacts')
         data = {'name': 'Contact 1'}
         response = self.client.post(url, data, format='json')
@@ -205,6 +267,9 @@ class ContactTests(TestCase):
 
 
     def test_get_contacts(self):
+        """
+        Test retrieving a list of all contacts.
+        """
         CustomContact.objects.create(app_user=self.app_user, name='Contact 1')
         url = reverse('contacts')
         response = self.client.get(url)
@@ -213,6 +278,9 @@ class ContactTests(TestCase):
 
 
     def test_update_contact(self):
+        """
+        Test updating an existing contact.
+        """
         contact = CustomContact.objects.create(app_user=self.app_user, name='Contact 1')
         url = reverse('contact', kwargs={'pk': contact.id})
         data = {'name': 'Updated Contact'}
@@ -223,6 +291,9 @@ class ContactTests(TestCase):
 
 
     def test_delete_contact(self):
+        """
+        Test deleting an existing contact.
+        """
         contact = CustomContact.objects.create(app_user=self.app_user, name='Contact 1')
         url = reverse('contact', kwargs={'pk': contact.id})
         response = self.client.delete(url)

@@ -1,7 +1,6 @@
 from django.urls import path
 from api.views import *
 
-
 urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('login/guest/', GuestLoginView.as_view(), name='login_guest'),

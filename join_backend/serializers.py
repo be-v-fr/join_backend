@@ -5,10 +5,16 @@ from api.models import AppUser, CustomContact, Task, Subtask
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for the Django User model, handling user creation and password protection.
+    """
     password = serializers.CharField(write_only=True)
 
 
     def create(self, validated_data):
+        """
+        Custom create method to handle user creation with hashed password.
+        """
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
@@ -22,6 +28,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         
         
 class AppUserSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for the AppUser model, linking to the related User model.
+    """
     user = UserSerializer(read_only=True)
     
     class Meta:
@@ -30,10 +39,16 @@ class AppUserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for the Task model, handling task creation and assignment to multiple AppUsers.
+    """
     assigned_to = serializers.PrimaryKeyRelatedField(queryset=AppUser.objects.all(), many=True)
     
     
     def create(self, validated_data):
+        """
+        Custom create method to handle the task creation and assignment to app users.
+        """
         app_users_ids = self.initial_data['assigned_to']
         task = Task.objects.create(
             title=validated_data['title'],
@@ -53,13 +68,20 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
         
         
 class SubtaskSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for the Subtask model, allowing association with a parent task.
+    """
     task = serializers.PrimaryKeyRelatedField(queryset=Task.objects.all())
+    
     class Meta:
         model = Subtask
         fields = ['id', 'name', 'status', 'task']
         
         
 class CustomContactSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for the CustomContact model, linking contacts to AppUsers.
+    """
     app_user = serializers.PrimaryKeyRelatedField(queryset=AppUser.objects.all(), default=AppUserSerializer())
     
     class Meta:

@@ -7,15 +7,25 @@ from .choices import PRIORITY, MEDIUM, CATEGORY, TECHNICAL_TASK, STATUS_ALL, STA
 
 
 class AppUser(models.Model):
+    """
+    Represents an application-specific user, extending the Django User model.
+    """
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
     color_id = models.PositiveSmallIntegerField(validators=[MaxValueValidator(24)], default=None, blank=True, null=True)
     
         
     def __str__(self):
+        """
+        Returns the string representation of the AppUser, showing the ID and username.
+        """
         return f"({self.id}) {self.user.username}"
 
 
 class Task(models.Model):
+    """
+    Represents a task with details like title, description, due date, priority, category, and status.
+    Tasks can be assigned to multiple AppUsers.
+    """
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=500, blank=True, default='')
     assigned_to = models.ManyToManyField(AppUser, default=None, blank=True)
@@ -39,10 +49,16 @@ class Task(models.Model):
     
     
     def __str__(self):
+        """
+        Returns the string representation of the Task, showing the ID and title.
+        """
         return f"({self.id}) {self.title}"
     
     
 class Subtask(models.Model):
+    """
+    Represents a subtask that belongs to a specific task. It includes a name and a status.
+    """
     name = models.CharField(max_length=30, default=None, blank=True, null=True)
     status = models.CharField(
         max_length=32,
@@ -53,10 +69,16 @@ class Subtask(models.Model):
     
     
     def __str__(self):
+        """
+        Returns the string representation of the Subtask, showing the ID and name.
+        """
         return f"({self.id}) {self.name}"
     
     
 class CustomContact(models.Model):
+    """
+    Represents a custom contact related to an AppUser. Stores details like name, email, phone number, and color ID.
+    """
     name = models.CharField(max_length=30)
     email = models.CharField(max_length=50, default=None, blank=True, null=True)
     phone = models.CharField(max_length=20, default=None, blank=True, null=True)
@@ -65,4 +87,7 @@ class CustomContact(models.Model):
     
     
     def __str__(self):
+        """
+        Returns the string representation of the CustomContact, showing the ID and name.
+        """
         return f"({self.id}) {self.name}"
