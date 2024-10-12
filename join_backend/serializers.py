@@ -36,6 +36,24 @@ class AppUserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AppUser
         fields = ['id', 'user', 'color_id']
+        
+        
+class ResetPasswordRequestSerializer(serializers.Serializer):
+    """
+    Serializer for password reset requests.
+    """
+    email = serializers.EmailField(required=True)
+    
+    
+class ResetPasswordSerializer(serializers.Serializer):
+    """
+    Serializer for password resets.
+    """
+    new_password = serializers.RegexField(
+        regex=r'^[A-Za-z\d@$!%*?&]{6,}$',
+        write_only=True,
+        error_messages={'invalid': ('Password must be at least 6 characters long')})
+    confirm_password = serializers.CharField(write_only=True, required=True)
 
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):

@@ -19,6 +19,22 @@ class AppUser(models.Model):
         Returns the string representation of the AppUser, showing the ID and username.
         """
         return f"({self.id}) {self.user.username}"
+    
+    
+class PasswordReset(models.Model):
+    """
+    Represents a password reset request by connecting a user's email to a token.
+    """
+    email = models.EmailField()
+    token = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+        
+    def __str__(self):
+        """
+        Returns the string representation of the AppUser, showing the ID and username.
+        """
+        return f"{self.email} ({self.created_at})"
 
 
 class Task(models.Model):

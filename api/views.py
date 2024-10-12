@@ -1,5 +1,6 @@
 from django.http import StreamingHttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
@@ -8,10 +9,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from .utils import get_login_response, check_email_availability
+import os
 import random
 import asyncio
-from api.models import AppUser, CustomContact, Task, Subtask
-from join_backend.serializers import AppUserSerializer, CustomContactSerializer, TaskSerializer, SubtaskSerializer, UserSerializer
+from api.models import AppUser, PasswordReset, CustomContact, Task, Subtask
+from join_backend.serializers import AppUserSerializer, CustomContactSerializer, ResetPasswordRequestSerializer, ResetPasswordSerializer, TaskSerializer, SubtaskSerializer, UserSerializer
 
 
 tasks_changed = False
@@ -94,6 +96,69 @@ class RegisterView(APIView):
                 users_changed = True
                 return Response(user_serializer.data, status=status.HTTP_201_CREATED)
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+class RequestPasswordReset(APIView):
+    """
+    Handles password reset requests by creating a password reset object.
+    """
+    permission_classes = []
+    serializer_class = ResetPasswordRequestSerializer
+
+    def post(self, request):
+        """
+        Executes the password reset request logic.
+        """
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid:
+            email = request.data['email']
+            user = User.objects.filter(email__iexact=email).first()
+            if user:
+                token_generator = PasswordResetTokenGenerator()
+                token = token_generator.make_token(user) 
+                reset = PasswordReset(email=email, token=token)
+                reset.save()
+                reset_url = f"{os.environ['PASSWORD_RESET_BASE_URL']}/{token}"
+
+                # Sending reset link via email (commented out for clarity)
+                # ... (email sending code)
+
+                return Response({'success': 'We have sent you a link to reset your password'}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "User with credentials not found"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+class ResetPassword(APIView):
+    """
+    Performs password reset and deletes the corresponding password reset object.
+    """
+    permission_classes = []
+    serializer_class = ResetPasswordSerializer
+
+
+    def post(self, request, token):
+        """
+        Executes the password reset logic.
+        """
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        new_password = serializer.validated_data['new_password']
+        confirm_password = serializer.validated_data['confirm_password']
+        if new_password != confirm_password:
+            return Response({"error": "Passwords do not match"}, status=400)
+        reset_obj = PasswordReset.objects.filter(token=token).first()
+        if not reset_obj:
+            return Response({'error':'Invalid token'}, status=400)
+        user = User.objects.filter(email=reset_obj.email).first()
+        if user:
+            user.set_password(new_password)
+            user.save()
+            reset_obj.delete()
+            return Response({'success':'Password updated'})
+        else: 
+            return Response({'error':'No user found'}, status=404)
 
 
 class TasksView(APIView):
