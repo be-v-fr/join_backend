@@ -2,11 +2,12 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APIClient
 from rest_framework import status
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from rest_framework.authtoken.models import Token
 from api.models import AppUser, Task, Subtask, CustomContact
 from api.choices import TECHNICAL_TASK
 
+User = get_user_model()
 
 class AuthTests(TestCase):
     """
@@ -16,7 +17,7 @@ class AuthTests(TestCase):
         """
         Set up initial data for tests, creating a test user, app user, and token for authentication.
         """
-        self.user = User.objects.create_user(username="testuser", password="testpass")
+        self.user = User.objects.create_user(username="Test_User", email="test@user.de", password="testpass")
         self.app_user = AppUser.objects.create(user=self.user)
         self.token = Token.objects.create(user=self.user)
         self.client = APIClient()
@@ -43,7 +44,7 @@ class AuthTests(TestCase):
         """
         url = reverse('login')
         data = {
-            'username': 'testuser',
+            'email': 'test@user.de',
             'password': 'testpass'
         }
         response = self.client.post(url, data, format='json')

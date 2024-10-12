@@ -1,5 +1,5 @@
 from django.http import StreamingHttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -13,8 +13,9 @@ import os
 import random
 import asyncio
 from api.models import AppUser, PasswordReset, CustomContact, Task, Subtask
-from join_backend.serializers import AppUserSerializer, CustomContactSerializer, ResetPasswordRequestSerializer, ResetPasswordSerializer, TaskSerializer, SubtaskSerializer, UserSerializer
+from join_backend.serializers import EmailAuthTokenSerializer, AppUserSerializer, CustomContactSerializer, ResetPasswordRequestSerializer, ResetPasswordSerializer, TaskSerializer, SubtaskSerializer, UserSerializer
 
+User = get_user_model()
 
 tasks_changed = False
 subtasks_changed = False
@@ -24,6 +25,9 @@ class LoginView(ObtainAuthToken):
     """
     Handles user login by validating credentials and returning an authentication token.
     """
+    serializer_class = EmailAuthTokenSerializer
+    
+    
     def post(self, request, *args, **kwargs):
         """
         Authenticates the user and returns a token along with app user details.
@@ -31,7 +35,8 @@ class LoginView(ObtainAuthToken):
         serializer = self.serializer_class(data=request.data,
                                            context={'request': request})
         if serializer.is_valid(raise_exception=True):
-            user = serializer.validated_data['user']
+            user_data = serializer.validated_data['user']
+            user = User.objects.get(email=user_data.email)
             token, created = Token.objects.get_or_create(user=user)
             app_user = AppUser.objects.get(user=user)
             if app_user:
@@ -48,9 +53,10 @@ class GuestLoginView(ObtainAuthToken):
         Logs in an existing guest user by their username and returns a token.
         """
         user = User.objects.get(username=username)
-        if user and len(user.email) == 0:
+        if user and user.email == 'guest@login.doesNotExist':
             token, created = Token.objects.get_or_create(user=user)
             app_user = AppUser.objects.get(user=user)
+            app_user.user.email = ''
             if app_user:
                 return get_login_response(app_user=app_user, token=token)
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)        
@@ -63,11 +69,12 @@ class GuestLoginView(ObtainAuthToken):
         username = request.data['username']
         if len(username) > 0:
             return self.login_existing_guest(username)
-        created_guest = User.objects.create(username='temp', password='guestlogin')
+        created_guest = User.objects.create(username='temp', email='guest@login.doesNotExist', password='guestlogin')
         token = Token.objects.create(user=created_guest)
         created_guest.username = token.key
         created_guest.save()
         created_app_user = AppUser.objects.create(user=created_guest)
+        created_app_user.email = ''
         return get_login_response(app_user=created_app_user, token=token)
 
 

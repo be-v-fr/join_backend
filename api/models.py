@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.conf import settings
 from django.core.validators import MaxValueValidator
 import datetime
@@ -10,7 +10,7 @@ class AppUser(models.Model):
     """
     Represents an application-specific user, extending the Django User model.
     """
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default=None, blank=True, null=True)
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE, default=None, blank=True, null=True)
     color_id = models.PositiveSmallIntegerField(validators=[MaxValueValidator(24)], default=None, blank=True, null=True)
     
         
