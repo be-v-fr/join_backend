@@ -46,6 +46,7 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">join_backend</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="join_backend.html">Base app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage.html">Django manage file</a></li>
 </ul>
@@ -139,6 +140,18 @@
 <li class="toctree-l4"><a class="reference internal" href="api.html#api.models.CustomContact.name"><code class="docutils literal notranslate"><span class="pre">CustomContact.name</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api.html#api.models.CustomContact.objects"><code class="docutils literal notranslate"><span class="pre">CustomContact.objects</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api.html#api.models.CustomContact.phone"><code class="docutils literal notranslate"><span class="pre">CustomContact.phone</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.models.PasswordReset"><code class="docutils literal notranslate"><span class="pre">PasswordReset</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">PasswordReset.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">PasswordReset.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.created_at"><code class="docutils literal notranslate"><span class="pre">PasswordReset.created_at</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.email"><code class="docutils literal notranslate"><span class="pre">PasswordReset.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.get_next_by_created_at"><code class="docutils literal notranslate"><span class="pre">PasswordReset.get_next_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.get_previous_by_created_at"><code class="docutils literal notranslate"><span class="pre">PasswordReset.get_previous_by_created_at()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.id"><code class="docutils literal notranslate"><span class="pre">PasswordReset.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.objects"><code class="docutils literal notranslate"><span class="pre">PasswordReset.objects</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.models.PasswordReset.token"><code class="docutils literal notranslate"><span class="pre">PasswordReset.token</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#api.models.Subtask"><code class="docutils literal notranslate"><span class="pre">Subtask</span></code></a><ul>
@@ -247,12 +260,25 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#api.views.LoginView"><code class="docutils literal notranslate"><span class="pre">LoginView</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api.html#api.views.LoginView.post"><code class="docutils literal notranslate"><span class="pre">LoginView.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.views.LoginView.serializer_class"><code class="docutils literal notranslate"><span class="pre">LoginView.serializer_class</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#api.views.RegisterView"><code class="docutils literal notranslate"><span class="pre">RegisterView</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="api.html#api.views.RegisterView.authentication_classes"><code class="docutils literal notranslate"><span class="pre">RegisterView.authentication_classes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api.html#api.views.RegisterView.permission_classes"><code class="docutils literal notranslate"><span class="pre">RegisterView.permission_classes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="api.html#api.views.RegisterView.post"><code class="docutils literal notranslate"><span class="pre">RegisterView.post()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.views.RequestPasswordReset"><code class="docutils literal notranslate"><span class="pre">RequestPasswordReset</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.views.RequestPasswordReset.permission_classes"><code class="docutils literal notranslate"><span class="pre">RequestPasswordReset.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.views.RequestPasswordReset.post"><code class="docutils literal notranslate"><span class="pre">RequestPasswordReset.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.views.RequestPasswordReset.serializer_class"><code class="docutils literal notranslate"><span class="pre">RequestPasswordReset.serializer_class</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#api.views.ResetPassword"><code class="docutils literal notranslate"><span class="pre">ResetPassword</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.views.ResetPassword.permission_classes"><code class="docutils literal notranslate"><span class="pre">ResetPassword.permission_classes</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.views.ResetPassword.post"><code class="docutils literal notranslate"><span class="pre">ResetPassword.post()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="api.html#api.views.ResetPassword.serializer_class"><code class="docutils literal notranslate"><span class="pre">ResetPassword.serializer_class</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#api.views.SubtasksView"><code class="docutils literal notranslate"><span class="pre">SubtasksView</span></code></a><ul>
@@ -289,6 +315,66 @@
 <li class="toctree-l2"><a class="reference internal" href="api.html#module-api">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core app</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.migrations.html">core.migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#module-core.migrations.0001_initial">core.migrations.0001_initial module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.migrations.html#module-core.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.admin">core.admin module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.apps">core.apps module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.apps.CoreConfig"><code class="docutils literal notranslate"><span class="pre">CoreConfig</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.apps.CoreConfig.default_auto_field"><code class="docutils literal notranslate"><span class="pre">CoreConfig.default_auto_field</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.apps.CoreConfig.name"><code class="docutils literal notranslate"><span class="pre">CoreConfig.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.backends">core.backends module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.backends.EmailBackend"><code class="docutils literal notranslate"><span class="pre">EmailBackend</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.backends.EmailBackend.authenticate"><code class="docutils literal notranslate"><span class="pre">EmailBackend.authenticate()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.models">core.models module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="core.html#core.models.User"><code class="docutils literal notranslate"><span class="pre">User</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.DoesNotExist"><code class="docutils literal notranslate"><span class="pre">User.DoesNotExist</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.MultipleObjectsReturned"><code class="docutils literal notranslate"><span class="pre">User.MultipleObjectsReturned</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.REQUIRED_FIELDS"><code class="docutils literal notranslate"><span class="pre">User.REQUIRED_FIELDS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.USERNAME_FIELD"><code class="docutils literal notranslate"><span class="pre">User.USERNAME_FIELD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.appuser"><code class="docutils literal notranslate"><span class="pre">User.appuser</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.auth_token"><code class="docutils literal notranslate"><span class="pre">User.auth_token</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.date_joined"><code class="docutils literal notranslate"><span class="pre">User.date_joined</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.email"><code class="docutils literal notranslate"><span class="pre">User.email</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.first_name"><code class="docutils literal notranslate"><span class="pre">User.first_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.get_next_by_date_joined"><code class="docutils literal notranslate"><span class="pre">User.get_next_by_date_joined()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.get_previous_by_date_joined"><code class="docutils literal notranslate"><span class="pre">User.get_previous_by_date_joined()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.groups"><code class="docutils literal notranslate"><span class="pre">User.groups</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.id"><code class="docutils literal notranslate"><span class="pre">User.id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.is_active"><code class="docutils literal notranslate"><span class="pre">User.is_active</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.is_staff"><code class="docutils literal notranslate"><span class="pre">User.is_staff</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.is_superuser"><code class="docutils literal notranslate"><span class="pre">User.is_superuser</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.last_login"><code class="docutils literal notranslate"><span class="pre">User.last_login</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.last_name"><code class="docutils literal notranslate"><span class="pre">User.last_name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.logentry_set"><code class="docutils literal notranslate"><span class="pre">User.logentry_set</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.password"><code class="docutils literal notranslate"><span class="pre">User.password</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.user_permissions"><code class="docutils literal notranslate"><span class="pre">User.user_permissions</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html#core.models.User.username"><code class="docutils literal notranslate"><span class="pre">User.username</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.tests">core.tests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core.views">core.views module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html#module-core">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="join_backend.html">Base app</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="join_backend.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="join_backend.html#module-join_backend.asgi">join_backend.asgi module</a></li>
@@ -301,6 +387,12 @@
 <li class="toctree-l4"><a class="reference internal" href="join_backend.html#join_backend.serializers.CustomContactSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">CustomContactSerializer.Meta</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="join_backend.html#join_backend.serializers.EmailAuthTokenSerializer"><code class="docutils literal notranslate"><span class="pre">EmailAuthTokenSerializer</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="join_backend.html#join_backend.serializers.EmailAuthTokenSerializer.validate"><code class="docutils literal notranslate"><span class="pre">EmailAuthTokenSerializer.validate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="join_backend.html#join_backend.serializers.ResetPasswordRequestSerializer"><code class="docutils literal notranslate"><span class="pre">ResetPasswordRequestSerializer</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="join_backend.html#join_backend.serializers.ResetPasswordSerializer"><code class="docutils literal notranslate"><span class="pre">ResetPasswordSerializer</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="join_backend.html#join_backend.serializers.SubtaskSerializer"><code class="docutils literal notranslate"><span class="pre">SubtaskSerializer</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="join_backend.html#join_backend.serializers.SubtaskSerializer.Meta"><code class="docutils literal notranslate"><span class="pre">SubtaskSerializer.Meta</span></code></a></li>
 </ul>

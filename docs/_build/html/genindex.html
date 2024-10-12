@@ -88,6 +88,7 @@
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
  | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
  
 </div>
 <h2 id="A">A</h2>
@@ -278,6 +279,8 @@
 </li>
       <li><a href="api.html#api.models.AppUser">AppUser (class in api.models)</a>
 </li>
+      <li><a href="core.html#core.models.User.appuser">appuser (core.models.User attribute)</a>
+</li>
       <li><a href="api.html#api.models.AppUser.DoesNotExist">AppUser.DoesNotExist</a>
 </li>
       <li><a href="api.html#api.models.AppUser.MultipleObjectsReturned">AppUser.MultipleObjectsReturned</a>
@@ -287,6 +290,10 @@
       <li><a href="join_backend.html#join_backend.serializers.AppUserSerializer.Meta">AppUserSerializer.Meta (class in join_backend.serializers)</a>
 </li>
       <li><a href="api.html#api.models.Task.assigned_to">assigned_to (api.models.Task attribute)</a>
+</li>
+      <li><a href="core.html#core.models.User.auth_token">auth_token (core.models.User attribute)</a>
+</li>
+      <li><a href="core.html#core.backends.EmailBackend.authenticate">authenticate() (core.backends.EmailBackend method)</a>
 </li>
       <li><a href="api.html#api.views.ContactsView.authentication_classes">authentication_classes (api.views.ContactsView attribute)</a>
 
@@ -324,16 +331,85 @@
 </li>
       <li><a href="api.html#api.tests.ContactTests">ContactTests (class in api.tests)</a>
 </li>
+      <li>
+    core
+
+      <ul>
+        <li><a href="core.html#module-core">module</a>
+</li>
+      </ul></li>
+      <li>
+    core.admin
+
+      <ul>
+        <li><a href="core.html#module-core.admin">module</a>
+</li>
+      </ul></li>
+      <li>
+    core.apps
+
+      <ul>
+        <li><a href="core.html#module-core.apps">module</a>
+</li>
+      </ul></li>
+      <li>
+    core.backends
+
+      <ul>
+        <li><a href="core.html#module-core.backends">module</a>
+</li>
+      </ul></li>
+      <li>
+    core.migrations
+
+      <ul>
+        <li><a href="core.migrations.html#module-core.migrations">module</a>
+</li>
+      </ul></li>
+      <li>
+    core.migrations.0001_initial
+
+      <ul>
+        <li><a href="core.migrations.html#module-core.migrations.0001_initial">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    core.models
+
+      <ul>
+        <li><a href="core.html#module-core.models">module</a>
+</li>
+      </ul></li>
+      <li>
+    core.tests
+
+      <ul>
+        <li><a href="core.html#module-core.tests">module</a>
+</li>
+      </ul></li>
+      <li>
+    core.views
+
+      <ul>
+        <li><a href="core.html#module-core.views">module</a>
+</li>
+      </ul></li>
+      <li><a href="core.html#core.apps.CoreConfig">CoreConfig (class in core.apps)</a>
+</li>
       <li><a href="join_backend.html#join_backend.serializers.TaskSerializer.create">create() (join_backend.serializers.TaskSerializer method)</a>
 
       <ul>
         <li><a href="join_backend.html#join_backend.serializers.UserSerializer.create">(join_backend.serializers.UserSerializer method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#api.models.Task.created_at">created_at (api.models.Task attribute)</a>
+      <li><a href="api.html#api.models.PasswordReset.created_at">created_at (api.models.PasswordReset attribute)</a>
+
+      <ul>
+        <li><a href="api.html#api.models.Task.created_at">(api.models.Task attribute)</a>
 </li>
+      </ul></li>
       <li><a href="api.html#api.views.CurrentUserView">CurrentUserView (class in api.views)</a>
 </li>
       <li><a href="api.html#api.models.CustomContact">CustomContact (class in api.models)</a>
@@ -352,8 +428,14 @@
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#api.apps.ApiConfig.default_auto_field">default_auto_field (api.apps.ApiConfig attribute)</a>
+      <li><a href="core.html#core.models.User.date_joined">date_joined (core.models.User attribute)</a>
 </li>
+      <li><a href="api.html#api.apps.ApiConfig.default_auto_field">default_auto_field (api.apps.ApiConfig attribute)</a>
+
+      <ul>
+        <li><a href="core.html#core.apps.CoreConfig.default_auto_field">(core.apps.CoreConfig attribute)</a>
+</li>
+      </ul></li>
       <li><a href="api.html#api.views.ContactsView.delete">delete() (api.views.ContactsView method)</a>
 
       <ul>
@@ -393,6 +475,8 @@
 </li>
         <li><a href="api.migrations.html#api.migrations.0015_alter_customcontact_email.Migration.dependencies">(api.migrations.0015_alter_customcontact_email.Migration attribute)</a>
 </li>
+        <li><a href="core.migrations.html#core.migrations.0001_initial.Migration.dependencies">(core.migrations.0001_initial.Migration attribute)</a>
+</li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -407,6 +491,18 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#api.models.CustomContact.email">email (api.models.CustomContact attribute)</a>
+
+      <ul>
+        <li><a href="api.html#api.models.PasswordReset.email">(api.models.PasswordReset attribute)</a>
+</li>
+        <li><a href="core.html#core.models.User.email">(core.models.User attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="join_backend.html#join_backend.serializers.EmailAuthTokenSerializer">EmailAuthTokenSerializer (class in join_backend.serializers)</a>
+</li>
+      <li><a href="core.html#core.backends.EmailBackend">EmailBackend (class in core.backends)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -426,6 +522,10 @@
         <li><a href="join_backend.html#join_backend.serializers.UserSerializer.Meta.fields">(join_backend.serializers.UserSerializer.Meta attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.models.User.first_name">first_name (core.models.User attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -448,13 +548,25 @@
 </li>
       <li><a href="api.html#api.utils.get_login_response">get_login_response() (in module api.utils)</a>
 </li>
+      <li><a href="api.html#api.models.PasswordReset.get_next_by_created_at">get_next_by_created_at() (api.models.PasswordReset method)</a>
+
+      <ul>
+        <li><a href="api.html#api.models.Task.get_next_by_created_at">(api.models.Task method)</a>
+</li>
+      </ul></li>
+      <li><a href="core.html#core.models.User.get_next_by_date_joined">get_next_by_date_joined() (core.models.User method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#api.models.Task.get_next_by_created_at">get_next_by_created_at() (api.models.Task method)</a>
-</li>
       <li><a href="api.html#api.models.Task.get_next_by_due">get_next_by_due() (api.models.Task method)</a>
 </li>
-      <li><a href="api.html#api.models.Task.get_previous_by_created_at">get_previous_by_created_at() (api.models.Task method)</a>
+      <li><a href="api.html#api.models.PasswordReset.get_previous_by_created_at">get_previous_by_created_at() (api.models.PasswordReset method)</a>
+
+      <ul>
+        <li><a href="api.html#api.models.Task.get_previous_by_created_at">(api.models.Task method)</a>
+</li>
+      </ul></li>
+      <li><a href="core.html#core.models.User.get_previous_by_date_joined">get_previous_by_date_joined() (core.models.User method)</a>
 </li>
       <li><a href="api.html#api.models.Task.get_previous_by_due">get_previous_by_due() (api.models.Task method)</a>
 </li>
@@ -466,6 +578,8 @@
         <li><a href="api.html#api.models.Task.get_status_display">(api.models.Task method)</a>
 </li>
       </ul></li>
+      <li><a href="core.html#core.models.User.groups">groups (core.models.User attribute)</a>
+</li>
       <li><a href="api.html#api.views.GuestLoginView">GuestLoginView (class in api.views)</a>
 </li>
   </ul></td>
@@ -479,14 +593,28 @@
       <ul>
         <li><a href="api.html#api.models.CustomContact.id">(api.models.CustomContact attribute)</a>
 </li>
+        <li><a href="api.html#api.models.PasswordReset.id">(api.models.PasswordReset attribute)</a>
+</li>
         <li><a href="api.html#api.models.Subtask.id">(api.models.Subtask attribute)</a>
 </li>
         <li><a href="api.html#api.models.Task.id">(api.models.Task attribute)</a>
+</li>
+        <li><a href="core.html#core.models.User.id">(core.models.User attribute)</a>
 </li>
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.migrations.html#api.migrations.0001_initial.Migration.initial">initial (api.migrations.0001_initial.Migration attribute)</a>
+
+      <ul>
+        <li><a href="core.migrations.html#core.migrations.0001_initial.Migration.initial">(core.migrations.0001_initial.Migration attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="core.html#core.models.User.is_active">is_active (core.models.User attribute)</a>
+</li>
+      <li><a href="core.html#core.models.User.is_staff">is_staff (core.models.User attribute)</a>
+</li>
+      <li><a href="core.html#core.models.User.is_superuser">is_superuser (core.models.User attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -544,10 +672,16 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="api.html#api.views.GuestLoginView.login_existing_guest">login_existing_guest() (api.views.GuestLoginView method)</a>
+      <li><a href="core.html#core.models.User.last_login">last_login (core.models.User attribute)</a>
+</li>
+      <li><a href="core.html#core.models.User.last_name">last_name (core.models.User attribute)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.models.User.logentry_set">logentry_set (core.models.User attribute)</a>
+</li>
+      <li><a href="api.html#api.views.GuestLoginView.login_existing_guest">login_existing_guest() (api.views.GuestLoginView method)</a>
+</li>
       <li><a href="api.html#api.views.LoginView">LoginView (class in api.views)</a>
 </li>
   </ul></td>
@@ -595,6 +729,8 @@
         <li><a href="api.migrations.html#api.migrations.0014_alter_task_assigned_to.Migration">(class in api.migrations.0014_alter_task_assigned_to)</a>
 </li>
         <li><a href="api.migrations.html#api.migrations.0015_alter_customcontact_email.Migration">(class in api.migrations.0015_alter_customcontact_email)</a>
+</li>
+        <li><a href="core.migrations.html#core.migrations.0001_initial.Migration">(class in core.migrations.0001_initial)</a>
 </li>
       </ul></li>
       <li><a href="join_backend.html#join_backend.serializers.AppUserSerializer.Meta.model">model (join_backend.serializers.AppUserSerializer.Meta attribute)</a>
@@ -663,6 +799,24 @@
 </li>
         <li><a href="api.html#module-api.views">api.views</a>
 </li>
+        <li><a href="core.html#module-core">core</a>
+</li>
+        <li><a href="core.html#module-core.admin">core.admin</a>
+</li>
+        <li><a href="core.html#module-core.apps">core.apps</a>
+</li>
+        <li><a href="core.html#module-core.backends">core.backends</a>
+</li>
+        <li><a href="core.migrations.html#module-core.migrations">core.migrations</a>
+</li>
+        <li><a href="core.migrations.html#module-core.migrations.0001_initial">core.migrations.0001_initial</a>
+</li>
+        <li><a href="core.html#module-core.models">core.models</a>
+</li>
+        <li><a href="core.html#module-core.tests">core.tests</a>
+</li>
+        <li><a href="core.html#module-core.views">core.views</a>
+</li>
         <li><a href="join_backend.html#module-join_backend">join_backend</a>
 </li>
         <li><a href="join_backend.html#module-join_backend.asgi">join_backend.asgi</a>
@@ -691,6 +845,8 @@
 </li>
         <li><a href="api.html#api.models.Subtask.name">(api.models.Subtask attribute)</a>
 </li>
+        <li><a href="core.html#core.apps.CoreConfig.name">(core.apps.CoreConfig attribute)</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -702,6 +858,8 @@
 
       <ul>
         <li><a href="api.html#api.models.CustomContact.objects">(api.models.CustomContact attribute)</a>
+</li>
+        <li><a href="api.html#api.models.PasswordReset.objects">(api.models.PasswordReset attribute)</a>
 </li>
         <li><a href="api.html#api.models.Subtask.objects">(api.models.Subtask attribute)</a>
 </li>
@@ -739,6 +897,8 @@
 </li>
         <li><a href="api.migrations.html#api.migrations.0015_alter_customcontact_email.Migration.operations">(api.migrations.0015_alter_customcontact_email.Migration attribute)</a>
 </li>
+        <li><a href="core.migrations.html#core.migrations.0001_initial.Migration.operations">(core.migrations.0001_initial.Migration attribute)</a>
+</li>
       </ul></li>
   </ul></td>
 </tr></table>
@@ -746,12 +906,24 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.models.User.password">password (core.models.User attribute)</a>
+</li>
+      <li><a href="api.html#api.models.PasswordReset">PasswordReset (class in api.models)</a>
+</li>
+      <li><a href="api.html#api.models.PasswordReset.DoesNotExist">PasswordReset.DoesNotExist</a>
+</li>
+      <li><a href="api.html#api.models.PasswordReset.MultipleObjectsReturned">PasswordReset.MultipleObjectsReturned</a>
+</li>
       <li><a href="api.html#api.views.ContactsView.permission_classes">permission_classes (api.views.ContactsView attribute)</a>
 
       <ul>
         <li><a href="api.html#api.views.CurrentUserView.permission_classes">(api.views.CurrentUserView attribute)</a>
 </li>
         <li><a href="api.html#api.views.RegisterView.permission_classes">(api.views.RegisterView attribute)</a>
+</li>
+        <li><a href="api.html#api.views.RequestPasswordReset.permission_classes">(api.views.RequestPasswordReset attribute)</a>
+</li>
+        <li><a href="api.html#api.views.ResetPassword.permission_classes">(api.views.ResetPassword attribute)</a>
 </li>
         <li><a href="api.html#api.views.SubtasksView.permission_classes">(api.views.SubtasksView attribute)</a>
 </li>
@@ -762,6 +934,8 @@
       </ul></li>
       <li><a href="api.html#api.models.CustomContact.phone">phone (api.models.CustomContact attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#api.views.ContactsView.post">post() (api.views.ContactsView method)</a>
 
       <ul>
@@ -771,13 +945,15 @@
 </li>
         <li><a href="api.html#api.views.RegisterView.post">(api.views.RegisterView method)</a>
 </li>
+        <li><a href="api.html#api.views.RequestPasswordReset.post">(api.views.RequestPasswordReset method)</a>
+</li>
+        <li><a href="api.html#api.views.ResetPassword.post">(api.views.ResetPassword method)</a>
+</li>
         <li><a href="api.html#api.views.SubtasksView.post">(api.views.SubtasksView method)</a>
 </li>
         <li><a href="api.html#api.views.TasksView.post">(api.views.TasksView method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#api.views.TasksView.post_task_with_subtasks">post_task_with_subtasks() (api.views.TasksView method)</a>
 </li>
       <li><a href="api.html#api.models.Task.prio">prio (api.models.Task attribute)</a>
@@ -800,12 +976,32 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#api.views.RegisterView">RegisterView (class in api.views)</a>
 </li>
+      <li><a href="api.html#api.views.RequestPasswordReset">RequestPasswordReset (class in api.views)</a>
+</li>
+      <li><a href="core.html#core.models.User.REQUIRED_FIELDS">REQUIRED_FIELDS (core.models.User attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#api.views.ResetPassword">ResetPassword (class in api.views)</a>
+</li>
+      <li><a href="join_backend.html#join_backend.serializers.ResetPasswordRequestSerializer">ResetPasswordRequestSerializer (class in join_backend.serializers)</a>
+</li>
+      <li><a href="join_backend.html#join_backend.serializers.ResetPasswordSerializer">ResetPasswordSerializer (class in join_backend.serializers)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api.html#api.views.LoginView.serializer_class">serializer_class (api.views.LoginView attribute)</a>
+
+      <ul>
+        <li><a href="api.html#api.views.RequestPasswordReset.serializer_class">(api.views.RequestPasswordReset attribute)</a>
+</li>
+        <li><a href="api.html#api.views.ResetPassword.serializer_class">(api.views.ResetPassword attribute)</a>
+</li>
+      </ul></li>
       <li><a href="api.html#api.tests.AuthTests.setUp">setUp() (api.tests.AuthTests method)</a>
 
       <ul>
@@ -912,6 +1108,8 @@
 </li>
       <li><a href="api.html#api.models.Task.title">title (api.models.Task attribute)</a>
 </li>
+      <li><a href="api.html#api.models.PasswordReset.token">token (api.models.PasswordReset attribute)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -920,14 +1118,26 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api.html#api.models.AppUser.user">user (api.models.AppUser attribute)</a>
 </li>
+      <li><a href="core.html#core.models.User">User (class in core.models)</a>
+</li>
+      <li><a href="core.html#core.models.User.DoesNotExist">User.DoesNotExist</a>
+</li>
+      <li><a href="core.html#core.models.User.MultipleObjectsReturned">User.MultipleObjectsReturned</a>
+</li>
       <li><a href="api.html#api.models.AppUser.user_id">user_id (api.models.AppUser attribute)</a>
+</li>
+      <li><a href="core.html#core.models.User.user_permissions">user_permissions (core.models.User attribute)</a>
 </li>
       <li><a href="api.html#api.models.AppUser.user_set">user_set (api.models.AppUser attribute)</a>
 </li>
-      <li><a href="api.html#api.views.users_stream">users_stream() (in module api.views)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core.html#core.models.User.username">username (core.models.User attribute)</a>
+</li>
+      <li><a href="core.html#core.models.User.USERNAME_FIELD">USERNAME_FIELD (core.models.User attribute)</a>
+</li>
+      <li><a href="api.html#api.views.users_stream">users_stream() (in module api.views)</a>
+</li>
       <li><a href="join_backend.html#join_backend.serializers.UserSerializer">UserSerializer (class in join_backend.serializers)</a>
 </li>
       <li><a href="join_backend.html#join_backend.serializers.UserSerializer.Meta">UserSerializer.Meta (class in join_backend.serializers)</a>
@@ -935,6 +1145,14 @@
       <li><a href="api.html#api.tests.UsersTests">UsersTests (class in api.tests)</a>
 </li>
       <li><a href="api.html#api.views.UsersView">UsersView (class in api.views)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="join_backend.html#join_backend.serializers.EmailAuthTokenSerializer.validate">validate() (join_backend.serializers.EmailAuthTokenSerializer method)</a>
 </li>
   </ul></td>
 </tr></table>

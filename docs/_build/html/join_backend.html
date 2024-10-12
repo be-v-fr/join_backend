@@ -52,6 +52,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-join_backend.serializers">Serializers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.AppUserSerializer"><code class="docutils literal notranslate"><span class="pre">AppUserSerializer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.CustomContactSerializer"><code class="docutils literal notranslate"><span class="pre">CustomContactSerializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.EmailAuthTokenSerializer"><code class="docutils literal notranslate"><span class="pre">EmailAuthTokenSerializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.ResetPasswordRequestSerializer"><code class="docutils literal notranslate"><span class="pre">ResetPasswordRequestSerializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.ResetPasswordSerializer"><code class="docutils literal notranslate"><span class="pre">ResetPasswordSerializer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.SubtaskSerializer"><code class="docutils literal notranslate"><span class="pre">SubtaskSerializer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.TaskSerializer"><code class="docutils literal notranslate"><span class="pre">TaskSerializer</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.UserSerializer"><code class="docutils literal notranslate"><span class="pre">UserSerializer</span></code></a></li>
@@ -124,7 +127,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="join_backend.serializers.AppUserSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.AppUserSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="api.html#api.models.AppUser" title="api.models.AppUser"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppUser</span></code></a></p>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">AppUser</span></code></p>
 </dd></dl>
 
 </dd></dl>
@@ -148,11 +151,37 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="join_backend.serializers.CustomContactSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.CustomContactSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="api.html#api.models.CustomContact" title="api.models.CustomContact"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomContact</span></code></a></p>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">CustomContact</span></code></p>
 </dd></dl>
 
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="join_backend.serializers.EmailAuthTokenSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">EmailAuthTokenSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.EmailAuthTokenSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
+<p>Serializer for email and password authentication.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="join_backend.serializers.EmailAuthTokenSerializer.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.EmailAuthTokenSerializer.validate" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="join_backend.serializers.ResetPasswordRequestSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">ResetPasswordRequestSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.ResetPasswordRequestSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
+<p>Serializer for password reset requests.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="join_backend.serializers.ResetPasswordSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">ResetPasswordSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.ResetPasswordSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
+<p>Serializer for password resets.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -172,7 +201,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="join_backend.serializers.SubtaskSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.SubtaskSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="api.html#api.models.Subtask" title="api.models.Subtask"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subtask</span></code></a></p>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Subtask</span></code></p>
 </dd></dl>
 
 </dd></dl>
@@ -196,7 +225,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="join_backend.serializers.TaskSerializer.Meta.model">
 <span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.TaskSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="api.html#api.models.Task" title="api.models.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a></p>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></p>
 </dd></dl>
 
 </dd></dl>
