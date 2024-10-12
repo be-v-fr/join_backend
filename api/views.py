@@ -74,7 +74,7 @@ class GuestLoginView(ObtainAuthToken):
         created_guest.username = token.key
         created_guest.save()
         created_app_user = AppUser.objects.create(user=created_guest)
-        created_app_user.email = ''
+        created_app_user.user.email = ''
         return get_login_response(app_user=created_app_user, token=token)
 
 
