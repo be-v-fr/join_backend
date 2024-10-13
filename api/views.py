@@ -54,7 +54,7 @@ class GuestLoginView(ObtainAuthToken):
         Logs in an existing guest user by their username and returns a token.
         """
         user = User.objects.get(username=username)
-        if user and len(user.email) > 9 and user.email[-8] == 'token.key':
+        if user and len(user.email) > 9 and user.email[-9] == 'token.key':
             token, created = Token.objects.get_or_create(user=user)
             app_user = AppUser.objects.get(user=user)
             if app_user:
