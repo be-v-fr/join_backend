@@ -57,7 +57,6 @@ class GuestLoginView(ObtainAuthToken):
         if user and len(user.email) > 9 and user.email[-8] == 'token.key':
             token, created = Token.objects.get_or_create(user=user)
             app_user = AppUser.objects.get(user=user)
-            app_user.user.email = ''
             if app_user:
                 return get_login_response(app_user=app_user, token=token)
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)        
@@ -76,7 +75,6 @@ class GuestLoginView(ObtainAuthToken):
         created_guest.email = token.key + '@token.key'
         created_guest.save()
         created_app_user = AppUser.objects.create(user=created_guest)
-        created_app_user.user.email = ''
         return get_login_response(app_user=created_app_user, token=token)
 
 
