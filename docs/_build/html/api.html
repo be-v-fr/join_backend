@@ -77,6 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-api.utils">Utils</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#api.utils.check_email_availability"><code class="docutils literal notranslate"><span class="pre">check_email_availability()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#api.utils.get_login_response"><code class="docutils literal notranslate"><span class="pre">get_login_response()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api.utils.send_password_reset_email"><code class="docutils literal notranslate"><span class="pre">send_password_reset_email()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-api.views">Views</a><ul>
@@ -98,6 +99,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#module-api">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="join_backend.html">Base app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manage.html">Django manage file</a></li>
 </ul>
@@ -924,6 +926,13 @@ If the email is taken, it returns a 400 error response.</p>
 It requires the corresponding AppUser and Token object.</p>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="api.utils.send_password_reset_email">
+<span class="sig-prename descclassname"><span class="pre">api.utils.</span></span><span class="sig-name descname"><span class="pre">send_password_reset_email</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">email_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset_url</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.utils.send_password_reset_email" title="Link to this definition"></a></dt>
+<dd><p>Sends a password reset email.
+The reset URL links to the frontend and must contain a valid token.</p>
+</dd></dl>
+
 </section>
 <section id="module-api.views">
 <span id="views"></span><h2>Views<a class="headerlink" href="#module-api.views" title="Link to this heading"></a></h2>
@@ -1089,7 +1098,7 @@ Returns the created user data or errors.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="api.views.ResetPassword.post">
-<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.views.ResetPassword.post" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#api.views.ResetPassword.post" title="Link to this definition"></a></dt>
 <dd><p>Executes the password reset logic.</p>
 </dd></dl>
 
