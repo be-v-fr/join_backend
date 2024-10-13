@@ -80,7 +80,7 @@ class ResetPasswordSerializer(serializers.Serializer):
         regex=r'^[A-Za-z\d@$!%*?&]{6,}$',
         write_only=True,
         error_messages={'invalid': ('Password must be at least 6 characters long')})
-    confirm_password = serializers.CharField(write_only=True, required=True)
+    token = serializers.CharField(write_only=True, required=True)
 
 
 class TaskSerializer(serializers.HyperlinkedModelSerializer):

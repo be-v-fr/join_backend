@@ -12,5 +12,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'join_backend.settings')
+os.environ.setdefault('FRONTEND_BASE_URL', 'http://localhost:4200/')
 
 application = get_wsgi_application()

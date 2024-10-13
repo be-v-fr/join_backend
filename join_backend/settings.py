@@ -84,6 +84,8 @@ ASGI_APPLICATION = 'join_backend.asgi.application'
 
 WSGI_APPLICATION = 'join_backend.wsgi.application'
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases

@@ -1,6 +1,8 @@
+import os
 from django.http import StreamingHttpResponse
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.urls import reverse
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
@@ -8,8 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from .utils import get_login_response, check_email_availability
-import os
+from .utils import get_login_response, check_email_availability, send_password_reset_email
 import random
 import asyncio
 from api.models import AppUser, PasswordReset, CustomContact, Task, Subtask
@@ -118,6 +119,8 @@ class RequestPasswordReset(APIView):
         Executes the password reset request logic.
         """
         serializer = self.serializer_class(data=request.data)
+        
+        
         if serializer.is_valid:
             email = request.data['email']
             user = User.objects.filter(email__iexact=email).first()
@@ -126,11 +129,8 @@ class RequestPasswordReset(APIView):
                 token = token_generator.make_token(user) 
                 reset = PasswordReset(email=email, token=token)
                 reset.save()
-                reset_url = f"{os.environ['PASSWORD_RESET_BASE_URL']}/{token}"
-
-                # Sending reset link via email (commented out for clarity)
-                # ... (email sending code)
-
+                reset_url = os.environ['FRONTEND_BASE_URL'] + 'reset_password/' + token
+                send_password_reset_email(email_address=user.email, reset_url=reset_url)
                 return Response({'success': 'We have sent you a link to reset your password'}, status=status.HTTP_200_OK)
             else:
                 return Response({"error": "User with credentials not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -146,17 +146,14 @@ class ResetPassword(APIView):
     serializer_class = ResetPasswordSerializer
 
 
-    def post(self, request, token):
+    def post(self, request):
         """
         Executes the password reset logic.
         """
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         new_password = serializer.validated_data['new_password']
-        confirm_password = serializer.validated_data['confirm_password']
-        if new_password != confirm_password:
-            return Response({"error": "Passwords do not match"}, status=400)
-        reset_obj = PasswordReset.objects.filter(token=token).first()
+        reset_obj = PasswordReset.objects.filter(token=serializer.validated_data['token']).first()
         if not reset_obj:
             return Response({'error':'Invalid token'}, status=400)
         user = User.objects.filter(email=reset_obj.email).first()
