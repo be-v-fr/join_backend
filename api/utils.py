@@ -11,10 +11,13 @@ def get_login_response(app_user, token):
     It requires the corresponding AppUser and Token object.
     """
     app_user_serializer = AppUserSerializer(app_user)
-    return Response({
-        'token': token.key,
-        'appUser': app_user_serializer.data,
-    })
+    return Response(
+            {
+                'token': token.key,
+                'appUser': app_user_serializer.data,
+            },
+            status=status.HTTP_200_OK
+        )
     
     
 def check_email_availability(email):

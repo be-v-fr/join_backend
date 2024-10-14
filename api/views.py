@@ -54,12 +54,12 @@ class GuestLoginView(ObtainAuthToken):
         Logs in an existing guest user by their username and returns a token.
         """
         user = User.objects.get(username=username)
-        if user and len(user.email) > 9 and user.email[-9] == 'token.key':
+        if user and len(user.email) > 9 and user.email[-9:] == 'token.key':
             token, created = Token.objects.get_or_create(user=user)
             app_user = AppUser.objects.get(user=user)
             if app_user:
                 return get_login_response(app_user=app_user, token=token)
-            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)        
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)        
 
     
     def post(self, request, *args, **kwargs):
@@ -67,6 +67,7 @@ class GuestLoginView(ObtainAuthToken):
         Logs in an existing guest or creates a new guest account, then returns a token.
         """
         username = request.data['username']
+        print('################### USERNAME', username)
         if len(username) > 0:
             return self.login_existing_guest(username)
         created_guest = User.objects.create(username='temp', email='temp@temp.com', password='guestlogin')
