@@ -67,7 +67,6 @@ class GuestLoginView(ObtainAuthToken):
         Logs in an existing guest or creates a new guest account, then returns a token.
         """
         username = request.data['username']
-        print('################### USERNAME', username)
         if len(username) > 0:
             return self.login_existing_guest(username)
         created_guest = User.objects.create(username='temp', email='temp@temp.com', password='guestlogin')
