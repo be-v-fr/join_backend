@@ -121,3 +121,4 @@ GitHub.sublime-settings
 
 up.bat
 secret_keys.py
+staticfiles/
