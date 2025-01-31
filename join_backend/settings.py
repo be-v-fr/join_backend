@@ -30,7 +30,8 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '34.159.226.199'
+    '34.159.226.199',
+    'api.join.bengt-fruechtenicht.de'
 ]
 
 CORS_ALLOWED_ORIGINS = [
