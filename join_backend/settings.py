@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-from secret_keys import DJANGO_SECRET_KEY
+from secret_keys import DJANGO_SECRET_KEY, EMAIL_HOST, EMAIL_USER, EMAIL_PASSWORD
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,8 +53,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'core',
-    'api',
+    'users_app',
+    'contacts_app',
+    'tasks_app',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -90,7 +92,13 @@ ASGI_APPLICATION = 'join_backend.asgi.application'
 
 WSGI_APPLICATION = 'join_backend.wsgi.application'
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = EMAIL_HOST
+EMAIL_USE_TLS = False
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = EMAIL_USER
+EMAIL_HOST_PASSWORD = EMAIL_PASSWORD
 
 
 # Database
@@ -102,8 +110,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-AUTH_USER_MODEL = 'core.User'
 
 
 # Password validation

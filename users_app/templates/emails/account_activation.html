@@ -1,0 +1,12 @@
+{% extends "emails/abstract_email.html" %}
+{% block content %}
+
+<p>Dear <span class="blue">{{recipient}}</span>,</p>
+<p>thank you for registering with <span class="blue">Join</span>. To complete your registration and verify
+    your email address, please click the link below:</p>
+<a class="link-btn" href="{{activation_url}}">Activate account</a>
+<p>If you did not create an account with us, please disregard this email.</p><br>
+<p>Best regards,</p><br>
+<p>Your Join Team</p>
+
+{% endblock %}

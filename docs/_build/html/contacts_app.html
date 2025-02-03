@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>contacts_app package &mdash; Join backend 0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=049aceee"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="contacts_app.migrations package" href="contacts_app.migrations.html" />
+    <link rel="prev" title="users_app.migrations package" href="users_app.migrations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Join backend
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">join_backend</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manage.html">Django manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="join_backend.html">Join backend main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users_app.html">Users app module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Contacts app module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="contacts_app.migrations.html">contacts_app.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contacts_app.admin">contacts_app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contacts_app.apps">contacts_app.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contacts_app.apps.ContactsAppConfig"><code class="docutils literal notranslate"><span class="pre">ContactsAppConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contacts_app.models">contacts_app.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contacts_app.models.CustomContact"><code class="docutils literal notranslate"><span class="pre">CustomContact</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contacts_app.serializers">contacts_app.serializers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contacts_app.serializers.CustomContactSerializer"><code class="docutils literal notranslate"><span class="pre">CustomContactSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contacts_app.tests">contacts_app.tests module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contacts_app.tests.ContactTests"><code class="docutils literal notranslate"><span class="pre">ContactTests</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contacts_app.urls">contacts_app.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contacts_app.views">contacts_app.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#contacts_app.views.ContactsView"><code class="docutils literal notranslate"><span class="pre">ContactsView</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contacts_app">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_app.html">Tasks app module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Join backend</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">join_backend</a></li>
+      <li class="breadcrumb-item active">contacts_app package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/contacts_app.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contacts-app-package">
+<h1>contacts_app package<a class="headerlink" href="#contacts-app-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contacts_app.migrations.html">contacts_app.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contacts_app.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contacts_app.migrations.html#module-contacts_app.migrations.0001_initial">contacts_app.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="contacts_app.migrations.html#contacts_app.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="contacts_app.migrations.html#contacts_app.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="contacts_app.migrations.html#contacts_app.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="contacts_app.migrations.html#contacts_app.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="contacts_app.migrations.html#module-contacts_app.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-contacts_app.admin">
+<span id="contacts-app-admin-module"></span><h2>contacts_app.admin module<a class="headerlink" href="#module-contacts_app.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-contacts_app.apps">
+<span id="contacts-app-apps-module"></span><h2>contacts_app.apps module<a class="headerlink" href="#module-contacts_app.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="contacts_app.apps.ContactsAppConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">contacts_app.apps.</span></span><span class="sig-name descname"><span class="pre">ContactsAppConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.apps.ContactsAppConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.apps.ContactsAppConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#contacts_app.apps.ContactsAppConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.apps.ContactsAppConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'contacts_app'</span></em><a class="headerlink" href="#contacts_app.apps.ContactsAppConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-contacts_app.models">
+<span id="contacts-app-models-module"></span><h2>contacts_app.models module<a class="headerlink" href="#module-contacts_app.models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">contacts_app.models.</span></span><span class="sig-name descname"><span class="pre">CustomContact</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.models.CustomContact" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Represents a custom contact related to an AppUser. Stores details like name, email, phone number, and color ID.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.app_user">
+<span class="sig-name descname"><span class="pre">app_user</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.app_user" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.app_user_id">
+<span class="sig-name descname"><span class="pre">app_user_id</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.app_user_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.color_id">
+<span class="sig-name descname"><span class="pre">color_id</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.color_id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.email">
+<span class="sig-name descname"><span class="pre">email</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.email" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#contacts_app.models.CustomContact.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.models.CustomContact.phone">
+<span class="sig-name descname"><span class="pre">phone</span></span><a class="headerlink" href="#contacts_app.models.CustomContact.phone" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-contacts_app.serializers">
+<span id="contacts-app-serializers-module"></span><h2>contacts_app.serializers module<a class="headerlink" href="#module-contacts_app.serializers" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="contacts_app.serializers.CustomContactSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">contacts_app.serializers.</span></span><span class="sig-name descname"><span class="pre">CustomContactSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.serializers.CustomContactSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
+<p>Serializer for the CustomContact model, linking contacts to AppUsers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="contacts_app.serializers.CustomContactSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#contacts_app.serializers.CustomContactSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.serializers.CustomContactSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'app_user',</span> <span class="pre">'name',</span> <span class="pre">'email',</span> <span class="pre">'phone',</span> <span class="pre">'color_id']</span></em><a class="headerlink" href="#contacts_app.serializers.CustomContactSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.serializers.CustomContactSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#contacts_app.serializers.CustomContactSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#contacts_app.models.CustomContact" title="contacts_app.models.CustomContact"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomContact</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-contacts_app.tests">
+<span id="contacts-app-tests-module"></span><h2>contacts_app.tests module<a class="headerlink" href="#module-contacts_app.tests" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="contacts_app.tests.ContactTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">contacts_app.tests.</span></span><span class="sig-name descname"><span class="pre">ContactTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.tests.ContactTests" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test suite for actions related to contacts, including creating, retrieving, updating, and deleting contacts.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.tests.ContactTests.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.tests.ContactTests.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up initial data, including creating a test user, app user, and token.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.tests.ContactTests.test_create_contact">
+<span class="sig-name descname"><span class="pre">test_create_contact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.tests.ContactTests.test_create_contact" title="Link to this definition"></a></dt>
+<dd><p>Test creating a new contact.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.tests.ContactTests.test_delete_contact">
+<span class="sig-name descname"><span class="pre">test_delete_contact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.tests.ContactTests.test_delete_contact" title="Link to this definition"></a></dt>
+<dd><p>Test deleting an existing contact.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.tests.ContactTests.test_get_contacts">
+<span class="sig-name descname"><span class="pre">test_get_contacts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.tests.ContactTests.test_get_contacts" title="Link to this definition"></a></dt>
+<dd><p>Test retrieving a list of all contacts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.tests.ContactTests.test_update_contact">
+<span class="sig-name descname"><span class="pre">test_update_contact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.tests.ContactTests.test_update_contact" title="Link to this definition"></a></dt>
+<dd><p>Test updating an existing contact.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-contacts_app.urls">
+<span id="contacts-app-urls-module"></span><h2>contacts_app.urls module<a class="headerlink" href="#module-contacts_app.urls" title="Link to this heading"></a></h2>
+</section>
+<section id="module-contacts_app.views">
+<span id="contacts-app-views-module"></span><h2>contacts_app.views module<a class="headerlink" href="#module-contacts_app.views" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="contacts_app.views.ContactsView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">contacts_app.views.</span></span><span class="sig-name descname"><span class="pre">ContactsView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.views.ContactsView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Manages CRUD operations for the user’s custom contacts.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.views.ContactsView.authentication_classes">
+<span class="sig-name descname"><span class="pre">authentication_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.authentication.TokenAuthentication'&gt;]</span></em><a class="headerlink" href="#contacts_app.views.ContactsView.authentication_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.views.ContactsView.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.views.ContactsView.delete" title="Link to this definition"></a></dt>
+<dd><p>Deletes a custom contact by its primary key and returns an appropriate status.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.views.ContactsView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.views.ContactsView.get" title="Link to this definition"></a></dt>
+<dd><p>Returns all custom contacts for the authenticated user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="contacts_app.views.ContactsView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;]</span></em><a class="headerlink" href="#contacts_app.views.ContactsView.permission_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.views.ContactsView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.views.ContactsView.post" title="Link to this definition"></a></dt>
+<dd><p>Creates a new custom contact for the authenticated user and returns it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="contacts_app.views.ContactsView.put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#contacts_app.views.ContactsView.put" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing custom contact for the authenticated user.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-contacts_app">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-contacts_app" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="users_app.migrations.html" class="btn btn-neutral float-left" title="users_app.migrations package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="contacts_app.migrations.html" class="btn btn-neutral float-right" title="contacts_app.migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bengt Früchtenicht.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

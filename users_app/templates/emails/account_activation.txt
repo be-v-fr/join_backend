@@ -1,0 +1,6 @@
+Dear {{recipient}},
+thank you for registering with Join. To complete your registration and verify your email address, please visit the URL below:
+{{activation_url}}
+If you did not create an account with us, please disregard this email.
+Best regards,
+Your Join Team

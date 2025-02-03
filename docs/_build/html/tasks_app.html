@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tasks_app package &mdash; Join backend 0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=7ab3649f" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=049aceee"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="tasks_app.migrations package" href="tasks_app.migrations.html" />
+    <link rel="prev" title="contacts_app.migrations package" href="contacts_app.migrations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Join backend
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">join_backend</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="manage.html">Django manage module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="join_backend.html">Join backend main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users_app.html">Users app module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contacts_app.html">Contacts app module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tasks app module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasks_app.migrations.html">tasks_app.migrations package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app.admin">tasks_app.admin module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app.apps">tasks_app.apps module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.apps.TasksAppConfig"><code class="docutils literal notranslate"><span class="pre">TasksAppConfig</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app.choices">tasks_app.choices module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app.models">tasks_app.models module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.models.Subtask"><code class="docutils literal notranslate"><span class="pre">Subtask</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.models.Task"><code class="docutils literal notranslate"><span class="pre">Task</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app.serializers">tasks_app.serializers module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.serializers.SubtaskSerializer"><code class="docutils literal notranslate"><span class="pre">SubtaskSerializer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.serializers.TaskSerializer"><code class="docutils literal notranslate"><span class="pre">TaskSerializer</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app.tests">tasks_app.tests module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.tests.SubtaskTests"><code class="docutils literal notranslate"><span class="pre">SubtaskTests</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.tests.TaskTests"><code class="docutils literal notranslate"><span class="pre">TaskTests</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app.urls">tasks_app.urls module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app.views">tasks_app.views module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.views.CurrentUserView"><code class="docutils literal notranslate"><span class="pre">CurrentUserView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.views.SubtasksView"><code class="docutils literal notranslate"><span class="pre">SubtasksView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.views.TasksView"><code class="docutils literal notranslate"><span class="pre">TasksView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.views.UsersView"><code class="docutils literal notranslate"><span class="pre">UsersView</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.views.subtasks_stream"><code class="docutils literal notranslate"><span class="pre">subtasks_stream()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tasks_app.views.tasks_stream"><code class="docutils literal notranslate"><span class="pre">tasks_stream()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#module-tasks_app">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Join backend</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">join_backend</a></li>
+      <li class="breadcrumb-item active">tasks_app package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/tasks_app.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tasks-app-package">
+<h1>tasks_app package<a class="headerlink" href="#tasks-app-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tasks_app.migrations.html">tasks_app.migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tasks_app.migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_app.migrations.html#module-tasks_app.migrations.0001_initial">tasks_app.migrations.0001_initial module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tasks_app.migrations.html#tasks_app.migrations.0001_initial.Migration"><code class="docutils literal notranslate"><span class="pre">Migration</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tasks_app.migrations.html#tasks_app.migrations.0001_initial.Migration.dependencies"><code class="docutils literal notranslate"><span class="pre">Migration.dependencies</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasks_app.migrations.html#tasks_app.migrations.0001_initial.Migration.initial"><code class="docutils literal notranslate"><span class="pre">Migration.initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tasks_app.migrations.html#tasks_app.migrations.0001_initial.Migration.operations"><code class="docutils literal notranslate"><span class="pre">Migration.operations</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_app.migrations.html#module-tasks_app.migrations">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-tasks_app.admin">
+<span id="tasks-app-admin-module"></span><h2>tasks_app.admin module<a class="headerlink" href="#module-tasks_app.admin" title="Link to this heading"></a></h2>
+</section>
+<section id="module-tasks_app.apps">
+<span id="tasks-app-apps-module"></span><h2>tasks_app.apps module<a class="headerlink" href="#module-tasks_app.apps" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.apps.TasksAppConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.apps.</span></span><span class="sig-name descname"><span class="pre">TasksAppConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_module</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.apps.TasksAppConfig" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">AppConfig</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.apps.TasksAppConfig.default_auto_field">
+<span class="sig-name descname"><span class="pre">default_auto_field</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'django.db.models.BigAutoField'</span></em><a class="headerlink" href="#tasks_app.apps.TasksAppConfig.default_auto_field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.apps.TasksAppConfig.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'tasks_app'</span></em><a class="headerlink" href="#tasks_app.apps.TasksAppConfig.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tasks_app.choices">
+<span id="tasks-app-choices-module"></span><h2>tasks_app.choices module<a class="headerlink" href="#module-tasks_app.choices" title="Link to this heading"></a></h2>
+</section>
+<section id="module-tasks_app.models">
+<span id="tasks-app-models-module"></span><h2>tasks_app.models module<a class="headerlink" href="#module-tasks_app.models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.models.</span></span><span class="sig-name descname"><span class="pre">Subtask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Subtask" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Represents a subtask that belongs to a specific task. It includes a name and a status.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#tasks_app.models.Subtask.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#tasks_app.models.Subtask.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.get_status_display">
+<span class="sig-name descname"><span class="pre">get_status_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">status&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Subtask.get_status_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#tasks_app.models.Subtask.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#tasks_app.models.Subtask.name" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#tasks_app.models.Subtask.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#tasks_app.models.Subtask.status" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.task">
+<span class="sig-name descname"><span class="pre">task</span></span><a class="headerlink" href="#tasks_app.models.Subtask.task" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Subtask.task_id">
+<span class="sig-name descname"><span class="pre">task_id</span></span><a class="headerlink" href="#tasks_app.models.Subtask.task_id" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.models.Task">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.models.</span></span><span class="sig-name descname"><span class="pre">Task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Task" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<p>Represents a task with details like title, description, due date, priority, category, and status.
+Tasks can be assigned to multiple AppUsers.</p>
+<dl class="py exception">
+<dt class="sig sig-object py" id="tasks_app.models.Task.DoesNotExist">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DoesNotExist</span></span><a class="headerlink" href="#tasks_app.models.Task.DoesNotExist" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ObjectDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="tasks_app.models.Task.MultipleObjectsReturned">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultipleObjectsReturned</span></span><a class="headerlink" href="#tasks_app.models.Task.MultipleObjectsReturned" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">MultipleObjectsReturned</span></code></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.assigned_to">
+<span class="sig-name descname"><span class="pre">assigned_to</span></span><a class="headerlink" href="#tasks_app.models.Task.assigned_to" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.category">
+<span class="sig-name descname"><span class="pre">category</span></span><a class="headerlink" href="#tasks_app.models.Task.category" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#tasks_app.models.Task.created_at" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.description">
+<span class="sig-name descname"><span class="pre">description</span></span><a class="headerlink" href="#tasks_app.models.Task.description" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.due">
+<span class="sig-name descname"><span class="pre">due</span></span><a class="headerlink" href="#tasks_app.models.Task.due" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.models.Task.get_category_display">
+<span class="sig-name descname"><span class="pre">get_category_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">category&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Task.get_category_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.models.Task.get_next_by_created_at">
+<span class="sig-name descname"><span class="pre">get_next_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Task.get_next_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.models.Task.get_next_by_due">
+<span class="sig-name descname"><span class="pre">get_next_by_due</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">due&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Task.get_next_by_due" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.models.Task.get_previous_by_created_at">
+<span class="sig-name descname"><span class="pre">get_previous_by_created_at</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">created_at&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Task.get_previous_by_created_at" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.models.Task.get_previous_by_due">
+<span class="sig-name descname"><span class="pre">get_previous_by_due</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.DateField:</span> <span class="pre">due&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_next=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Task.get_previous_by_due" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.models.Task.get_prio_display">
+<span class="sig-name descname"><span class="pre">get_prio_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">prio&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Task.get_prio_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.models.Task.get_status_display">
+<span class="sig-name descname"><span class="pre">get_status_display</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field=&lt;django.db.models.fields.CharField:</span> <span class="pre">status&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.models.Task.get_status_display" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#tasks_app.models.Task.id" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.objects">
+<span class="sig-name descname"><span class="pre">objects</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;django.db.models.manager.Manager</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#tasks_app.models.Task.objects" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.prio">
+<span class="sig-name descname"><span class="pre">prio</span></span><a class="headerlink" href="#tasks_app.models.Task.prio" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#tasks_app.models.Task.status" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.task_set">
+<span class="sig-name descname"><span class="pre">task_set</span></span><a class="headerlink" href="#tasks_app.models.Task.task_set" title="Link to this definition"></a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.models.Task.title">
+<span class="sig-name descname"><span class="pre">title</span></span><a class="headerlink" href="#tasks_app.models.Task.title" title="Link to this definition"></a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tasks_app.serializers">
+<span id="tasks-app-serializers-module"></span><h2>tasks_app.serializers module<a class="headerlink" href="#module-tasks_app.serializers" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.serializers.SubtaskSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.serializers.</span></span><span class="sig-name descname"><span class="pre">SubtaskSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.serializers.SubtaskSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
+<p>Serializer for the Subtask model, allowing association with a parent task.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.serializers.SubtaskSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#tasks_app.serializers.SubtaskSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.serializers.SubtaskSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'name',</span> <span class="pre">'status',</span> <span class="pre">'task']</span></em><a class="headerlink" href="#tasks_app.serializers.SubtaskSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.serializers.SubtaskSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#tasks_app.serializers.SubtaskSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#tasks_app.models.Subtask" title="tasks_app.models.Subtask"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subtask</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.serializers.TaskSerializer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.serializers.</span></span><span class="sig-name descname"><span class="pre">TaskSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.serializers.TaskSerializer" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
+<p>Serializer for the Task model, handling task creation and assignment to multiple AppUsers.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.serializers.TaskSerializer.Meta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#tasks_app.serializers.TaskSerializer.Meta" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.serializers.TaskSerializer.Meta.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'title',</span> <span class="pre">'description',</span> <span class="pre">'assigned_to',</span> <span class="pre">'created_at',</span> <span class="pre">'due',</span> <span class="pre">'prio',</span> <span class="pre">'category',</span> <span class="pre">'status']</span></em><a class="headerlink" href="#tasks_app.serializers.TaskSerializer.Meta.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.serializers.TaskSerializer.Meta.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#tasks_app.serializers.TaskSerializer.Meta.model" title="Link to this definition"></a></dt>
+<dd><p>alias of <a class="reference internal" href="#tasks_app.models.Task" title="tasks_app.models.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.serializers.TaskSerializer.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validated_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.serializers.TaskSerializer.create" title="Link to this definition"></a></dt>
+<dd><p>Custom create method to handle the task creation and assignment to app users.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tasks_app.tests">
+<span id="tasks-app-tests-module"></span><h2>tasks_app.tests module<a class="headerlink" href="#module-tasks_app.tests" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.tests.SubtaskTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.tests.</span></span><span class="sig-name descname"><span class="pre">SubtaskTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.SubtaskTests" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test suite for actions related to subtasks, including retrieving, creating, updating, and deleting subtasks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.SubtaskTests.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.SubtaskTests.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up initial data, creating a test user, app user, task, subtask, and token.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.SubtaskTests.test_create_subtask">
+<span class="sig-name descname"><span class="pre">test_create_subtask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.SubtaskTests.test_create_subtask" title="Link to this definition"></a></dt>
+<dd><p>Test creating a new subtask.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.SubtaskTests.test_delete_subtask">
+<span class="sig-name descname"><span class="pre">test_delete_subtask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.SubtaskTests.test_delete_subtask" title="Link to this definition"></a></dt>
+<dd><p>Test deleting an existing subtask.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.SubtaskTests.test_get_subtasks">
+<span class="sig-name descname"><span class="pre">test_get_subtasks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.SubtaskTests.test_get_subtasks" title="Link to this definition"></a></dt>
+<dd><p>Test retrieving a list of all subtasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.SubtaskTests.test_update_subtask">
+<span class="sig-name descname"><span class="pre">test_update_subtask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.SubtaskTests.test_update_subtask" title="Link to this definition"></a></dt>
+<dd><p>Test updating an existing subtask.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.tests.TaskTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.tests.</span></span><span class="sig-name descname"><span class="pre">TaskTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.TaskTests" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test suite for actions related to tasks, including retrieving, creating, updating, and deleting tasks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.TaskTests.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.TaskTests.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up initial data, creating a test user, app user, task, subtask, and token.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.TaskTests.test_create_task_with_subtasks">
+<span class="sig-name descname"><span class="pre">test_create_task_with_subtasks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.TaskTests.test_create_task_with_subtasks" title="Link to this definition"></a></dt>
+<dd><p>Test creating a task along with its subtasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.TaskTests.test_delete_task">
+<span class="sig-name descname"><span class="pre">test_delete_task</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.TaskTests.test_delete_task" title="Link to this definition"></a></dt>
+<dd><p>Test deleting an existing task.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.TaskTests.test_get_tasks">
+<span class="sig-name descname"><span class="pre">test_get_tasks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.TaskTests.test_get_tasks" title="Link to this definition"></a></dt>
+<dd><p>Test retrieving a list of all tasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.tests.TaskTests.test_update_task">
+<span class="sig-name descname"><span class="pre">test_update_task</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.tests.TaskTests.test_update_task" title="Link to this definition"></a></dt>
+<dd><p>Test updating an existing task and its associated subtasks.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-tasks_app.urls">
+<span id="tasks-app-urls-module"></span><h2>tasks_app.urls module<a class="headerlink" href="#module-tasks_app.urls" title="Link to this heading"></a></h2>
+</section>
+<section id="module-tasks_app.views">
+<span id="tasks-app-views-module"></span><h2>tasks_app.views module<a class="headerlink" href="#module-tasks_app.views" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.views.CurrentUserView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.views.</span></span><span class="sig-name descname"><span class="pre">CurrentUserView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.CurrentUserView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Returns the currently authenticated app user’s details.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.views.CurrentUserView.authentication_classes">
+<span class="sig-name descname"><span class="pre">authentication_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.authentication.TokenAuthentication'&gt;]</span></em><a class="headerlink" href="#tasks_app.views.CurrentUserView.authentication_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.CurrentUserView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.CurrentUserView.get" title="Link to this definition"></a></dt>
+<dd><p>Returns the app user details for the currently authenticated user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.views.CurrentUserView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;]</span></em><a class="headerlink" href="#tasks_app.views.CurrentUserView.permission_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.views.SubtasksView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.views.</span></span><span class="sig-name descname"><span class="pre">SubtasksView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.SubtasksView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Manages CRUD operations for subtasks.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.views.SubtasksView.authentication_classes">
+<span class="sig-name descname"><span class="pre">authentication_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.authentication.TokenAuthentication'&gt;]</span></em><a class="headerlink" href="#tasks_app.views.SubtasksView.authentication_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.SubtasksView.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.SubtasksView.delete" title="Link to this definition"></a></dt>
+<dd><p>Deletes a subtask by its primary key and returns an appropriate status.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.SubtasksView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.SubtasksView.get" title="Link to this definition"></a></dt>
+<dd><p>Returns all subtasks in the system.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.views.SubtasksView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;]</span></em><a class="headerlink" href="#tasks_app.views.SubtasksView.permission_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.SubtasksView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.SubtasksView.post" title="Link to this definition"></a></dt>
+<dd><p>Creates a new subtask and returns the created subtask.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.SubtasksView.put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.SubtasksView.put" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing subtask and returns the updated subtask.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.views.</span></span><span class="sig-name descname"><span class="pre">TasksView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.TasksView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Manages CRUD operations for tasks and their associated subtasks.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView.authentication_classes">
+<span class="sig-name descname"><span class="pre">authentication_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.authentication.TokenAuthentication'&gt;]</span></em><a class="headerlink" href="#tasks_app.views.TasksView.authentication_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView.delete">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.TasksView.delete" title="Link to this definition"></a></dt>
+<dd><p>Deletes a task by its primary key and returns an appropriate status.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.TasksView.get" title="Link to this definition"></a></dt>
+<dd><p>Returns all tasks in the system.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;]</span></em><a class="headerlink" href="#tasks_app.views.TasksView.permission_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.TasksView.post" title="Link to this definition"></a></dt>
+<dd><p>Creates a new task with subtasks and returns the created task.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView.post_task_with_subtasks">
+<span class="sig-name descname"><span class="pre">post_task_with_subtasks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_serializer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtasks_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.TasksView.post_task_with_subtasks" title="Link to this definition"></a></dt>
+<dd><p>Creates a task along with its subtasks and returns the created task.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView.put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.TasksView.put" title="Link to this definition"></a></dt>
+<dd><p>Updates an existing task and its subtasks.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.TasksView.put_task_with_subtasks">
+<span class="sig-name descname"><span class="pre">put_task_with_subtasks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_serializer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subtasks_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.TasksView.put_task_with_subtasks" title="Link to this definition"></a></dt>
+<dd><p>Updates a task and its subtasks, then returns the updated task.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tasks_app.views.UsersView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.views.</span></span><span class="sig-name descname"><span class="pre">UsersView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.UsersView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">APIView</span></code></p>
+<p>Returns a list of all app users in the system.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.views.UsersView.authentication_classes">
+<span class="sig-name descname"><span class="pre">authentication_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.authentication.TokenAuthentication'&gt;]</span></em><a class="headerlink" href="#tasks_app.views.UsersView.authentication_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tasks_app.views.UsersView.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.UsersView.get" title="Link to this definition"></a></dt>
+<dd><p>Returns all app users in the system.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tasks_app.views.UsersView.permission_classes">
+<span class="sig-name descname"><span class="pre">permission_classes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'rest_framework.permissions.IsAuthenticated'&gt;]</span></em><a class="headerlink" href="#tasks_app.views.UsersView.permission_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tasks_app.views.subtasks_stream">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.views.</span></span><span class="sig-name descname"><span class="pre">subtasks_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.subtasks_stream" title="Link to this definition"></a></dt>
+<dd><p>Sends empty events to the client for subtask data update notifications.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tasks_app.views.tasks_stream">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tasks_app.views.</span></span><span class="sig-name descname"><span class="pre">tasks_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#tasks_app.views.tasks_stream" title="Link to this definition"></a></dt>
+<dd><p>Sends empty events to the client for task data update notifications.</p>
+</dd></dl>
+
+</section>
+<section id="module-tasks_app">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tasks_app" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="contacts_app.migrations.html" class="btn btn-neutral float-left" title="contacts_app.migrations package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tasks_app.migrations.html" class="btn btn-neutral float-right" title="tasks_app.migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Bengt Früchtenicht.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

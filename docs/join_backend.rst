@@ -12,15 +12,7 @@ join\_backend.asgi module
    :undoc-members:
    :show-inheritance:
 
-Serializers
---------------------------------
-
-.. automodule:: join_backend.serializers
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Settings
+join\_backend.settings module
 -----------------------------
 
 .. automodule:: join_backend.settings
@@ -28,7 +20,7 @@ Settings
    :undoc-members:
    :show-inheritance:
 
-URLs
+join\_backend.urls module
 -------------------------
 
 .. automodule:: join_backend.urls

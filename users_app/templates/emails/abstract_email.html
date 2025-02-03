@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email</title>
+    <style>
+        p {
+            margin: 0;
+        }
+
+        .blue {
+            color: #007cee;
+        }
+
+        .link-btn {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007cee;
+            cursor: pointer;
+            width: 180px;
+            height: 40px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 75ms ease;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .logo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo-container">
+        <img src="cid:logo" alt="Join">
+    </div>
+    
+    {% block content %}
+    {% endblock %}
+</body>
+
+</html>

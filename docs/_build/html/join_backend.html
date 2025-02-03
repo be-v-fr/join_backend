@@ -6,21 +6,21 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>join_backend package &mdash; Join  documentation</title>
+  <title>join_backend package &mdash; Join backend 0.9 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=7ab3649f" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/documentation_options.js?v=049aceee"></script>
       <script src="_static/doctools.js?v=9a2dae69"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="manage module" href="manage.html" />
-    <link rel="prev" title="core.migrations package" href="core.migrations.html" /> 
+    <link rel="next" title="users_app package" href="users_app.html" />
+    <link rel="prev" title="manage module" href="manage.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -32,7 +32,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            Join
+            Join backend
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -45,29 +45,19 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">join_backend</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l2"><a class="reference internal" href="core.html">Core app</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Base app</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manage.html">Django manage module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Join backend main module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-join_backend.asgi">join_backend.asgi module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-join_backend.serializers">Serializers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.AppUserSerializer"><code class="docutils literal notranslate"><span class="pre">AppUserSerializer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.CustomContactSerializer"><code class="docutils literal notranslate"><span class="pre">CustomContactSerializer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.EmailAuthTokenSerializer"><code class="docutils literal notranslate"><span class="pre">EmailAuthTokenSerializer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.ResetPasswordRequestSerializer"><code class="docutils literal notranslate"><span class="pre">ResetPasswordRequestSerializer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.ResetPasswordSerializer"><code class="docutils literal notranslate"><span class="pre">ResetPasswordSerializer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.SubtaskSerializer"><code class="docutils literal notranslate"><span class="pre">SubtaskSerializer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.TaskSerializer"><code class="docutils literal notranslate"><span class="pre">TaskSerializer</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#join_backend.serializers.UserSerializer"><code class="docutils literal notranslate"><span class="pre">UserSerializer</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-join_backend.settings">Settings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-join_backend.urls">URLs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-join_backend.settings">join_backend.settings module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-join_backend.urls">join_backend.urls module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-join_backend.wsgi">join_backend.wsgi module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-join_backend">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="manage.html">Django manage file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="users_app.html">Users app module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contacts_app.html">Contacts app module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tasks_app.html">Tasks app module</a></li>
 </ul>
 </li>
 </ul>
@@ -78,7 +68,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">Join</a>
+          <a href="index.html">Join backend</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -109,169 +99,8 @@
 <p>For more information on this file, see
 <a class="reference external" href="https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/">https://docs.djangoproject.com/en/5.1/howto/deployment/asgi/</a></p>
 </section>
-<section id="module-join_backend.serializers">
-<span id="serializers"></span><h2>Serializers<a class="headerlink" href="#module-join_backend.serializers" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.AppUserSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">AppUserSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.AppUserSerializer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
-<p>Serializer for the AppUser model, linking to the related User model.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.AppUserSerializer.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#join_backend.serializers.AppUserSerializer.Meta" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.AppUserSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'user',</span> <span class="pre">'color_id']</span></em><a class="headerlink" href="#join_backend.serializers.AppUserSerializer.Meta.fields" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.AppUserSerializer.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.AppUserSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="api.html#api.models.AppUser" title="api.models.AppUser"><code class="xref py py-class docutils literal notranslate"><span class="pre">AppUser</span></code></a></p>
-</dd></dl>
-
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.CustomContactSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">CustomContactSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.CustomContactSerializer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
-<p>Serializer for the CustomContact model, linking contacts to AppUsers.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.CustomContactSerializer.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#join_backend.serializers.CustomContactSerializer.Meta" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.CustomContactSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'app_user',</span> <span class="pre">'name',</span> <span class="pre">'email',</span> <span class="pre">'phone',</span> <span class="pre">'color_id']</span></em><a class="headerlink" href="#join_backend.serializers.CustomContactSerializer.Meta.fields" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.CustomContactSerializer.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.CustomContactSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="api.html#api.models.CustomContact" title="api.models.CustomContact"><code class="xref py py-class docutils literal notranslate"><span class="pre">CustomContact</span></code></a></p>
-</dd></dl>
-
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.EmailAuthTokenSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">EmailAuthTokenSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.EmailAuthTokenSerializer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
-<p>Serializer for email and password authentication.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="join_backend.serializers.EmailAuthTokenSerializer.validate">
-<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.EmailAuthTokenSerializer.validate" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.ResetPasswordRequestSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">ResetPasswordRequestSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.ResetPasswordRequestSerializer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
-<p>Serializer for password reset requests.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.ResetPasswordSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">ResetPasswordSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.ResetPasswordSerializer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Serializer</span></code></p>
-<p>Serializer for password resets.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.SubtaskSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">SubtaskSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.SubtaskSerializer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
-<p>Serializer for the Subtask model, allowing association with a parent task.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.SubtaskSerializer.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#join_backend.serializers.SubtaskSerializer.Meta" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.SubtaskSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'name',</span> <span class="pre">'status',</span> <span class="pre">'task']</span></em><a class="headerlink" href="#join_backend.serializers.SubtaskSerializer.Meta.fields" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.SubtaskSerializer.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.SubtaskSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="api.html#api.models.Subtask" title="api.models.Subtask"><code class="xref py py-class docutils literal notranslate"><span class="pre">Subtask</span></code></a></p>
-</dd></dl>
-
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.TaskSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">TaskSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.TaskSerializer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
-<p>Serializer for the Task model, handling task creation and assignment to multiple AppUsers.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.TaskSerializer.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#join_backend.serializers.TaskSerializer.Meta" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.TaskSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'title',</span> <span class="pre">'description',</span> <span class="pre">'assigned_to',</span> <span class="pre">'created_at',</span> <span class="pre">'due',</span> <span class="pre">'prio',</span> <span class="pre">'category',</span> <span class="pre">'status']</span></em><a class="headerlink" href="#join_backend.serializers.TaskSerializer.Meta.fields" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.TaskSerializer.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.TaskSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="api.html#api.models.Task" title="api.models.Task"><code class="xref py py-class docutils literal notranslate"><span class="pre">Task</span></code></a></p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="join_backend.serializers.TaskSerializer.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validated_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.TaskSerializer.create" title="Link to this definition"></a></dt>
-<dd><p>Custom create method to handle the task creation and assignment to app users.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.UserSerializer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">join_backend.serializers.</span></span><span class="sig-name descname"><span class="pre">UserSerializer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.UserSerializer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">HyperlinkedModelSerializer</span></code></p>
-<p>Serializer for the Django User model, handling user creation and password protection.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="join_backend.serializers.UserSerializer.Meta">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Meta</span></span><a class="headerlink" href="#join_backend.serializers.UserSerializer.Meta" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.UserSerializer.Meta.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['id',</span> <span class="pre">'username',</span> <span class="pre">'email',</span> <span class="pre">'password']</span></em><a class="headerlink" href="#join_backend.serializers.UserSerializer.Meta.fields" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="join_backend.serializers.UserSerializer.Meta.model">
-<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#join_backend.serializers.UserSerializer.Meta.model" title="Link to this definition"></a></dt>
-<dd><p>alias of <a class="reference internal" href="core.html#core.models.User" title="core.models.User"><code class="xref py py-class docutils literal notranslate"><span class="pre">User</span></code></a></p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="join_backend.serializers.UserSerializer.create">
-<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">validated_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#join_backend.serializers.UserSerializer.create" title="Link to this definition"></a></dt>
-<dd><p>Custom create method to handle user creation with hashed password.</p>
-</dd></dl>
-
-</dd></dl>
-
-</section>
 <section id="module-join_backend.settings">
-<span id="settings"></span><h2>Settings<a class="headerlink" href="#module-join_backend.settings" title="Link to this heading"></a></h2>
+<span id="join-backend-settings-module"></span><h2>join_backend.settings module<a class="headerlink" href="#module-join_backend.settings" title="Link to this heading"></a></h2>
 <p>Django settings for join_backend project.</p>
 <p>Generated by ‘django-admin startproject’ using Django 5.1.1.</p>
 <p>For more information on this file, see
@@ -280,7 +109,7 @@
 <a class="reference external" href="https://docs.djangoproject.com/en/5.1/ref/settings/">https://docs.djangoproject.com/en/5.1/ref/settings/</a></p>
 </section>
 <section id="module-join_backend.urls">
-<span id="urls"></span><h2>URLs<a class="headerlink" href="#module-join_backend.urls" title="Link to this heading"></a></h2>
+<span id="join-backend-urls-module"></span><h2>join_backend.urls module<a class="headerlink" href="#module-join_backend.urls" title="Link to this heading"></a></h2>
 </section>
 <section id="module-join_backend.wsgi">
 <span id="join-backend-wsgi-module"></span><h2>join_backend.wsgi module<a class="headerlink" href="#module-join_backend.wsgi" title="Link to this heading"></a></h2>
@@ -298,14 +127,14 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="core.migrations.html" class="btn btn-neutral float-left" title="core.migrations package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="manage.html" class="btn btn-neutral float-right" title="manage module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="manage.html" class="btn btn-neutral float-left" title="manage module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="users_app.html" class="btn btn-neutral float-right" title="users_app package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024, Bengt Früchtenicht.</p>
+    <p>&#169; Copyright 2025, Bengt Früchtenicht.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
