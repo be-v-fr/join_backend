@@ -12,7 +12,6 @@ from .serializers import RequestPasswordResetSerializer, PerformPasswordResetSer
 
 users_changed = False
 
-
 class LoginView(APIView):
     """
     API endpoint for user login.
@@ -74,7 +73,8 @@ class UserView(APIView):
         """
         Retrieves user profile.
         """
-        serializer = UserSerializer(instance=request.user)
+        app_user = AppUser.objects.get(user=request.user)
+        serializer = AppUserSerializer(instance=app_user)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
 class ActivateAccount(APIView):

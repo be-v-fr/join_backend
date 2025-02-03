@@ -5,7 +5,7 @@ from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
 from rest_framework.authtoken.models import Token
-from .models import AccountActivation, AccountActivationTokenGenerator, PasswordReset
+from .models import AccountActivation, AccountActivationTokenGenerator, PasswordReset, AppUser
 from datetime import timedelta
 
 os.environ.setdefault('FRONTEND_BASE_URL', 'http://localhost:4200/')
@@ -19,6 +19,7 @@ class AuthTests(APITestCase):
         Creates a user and an associated authentication token.
         """
         self.user = User.objects.create_user(username='testuser', email='testemail@email.com', password='testpassword')
+        self.app_user = AppUser.objects.create(user=self.user, color_id=0)
         self.token = Token.objects.create(user=self.user)
         self.client = APIClient()
         
@@ -28,7 +29,6 @@ class AuthTests(APITestCase):
         
         Asserts:
             - 200 OK status.
-            - Absence of username in response data.
             - Presence of required fields in response data.
         """
         data = {
@@ -38,8 +38,7 @@ class AuthTests(APITestCase):
         url = reverse('login')
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertNotIn('username', response.data)
-        for key in ('token', 'email', 'user_id'):
+        for key in ('token', 'appUser'):
             self.assertIn(key, response.data)
             
     def test_login_inactive_bad_request(self):
@@ -101,6 +100,7 @@ class AuthTests(APITestCase):
             - Absence of any token or user data in response.
         """
         data = {
+            'username': 'Second User',
             'email': 'seconduser@mail.com',
             'password': 'testPassword123',
         }
@@ -110,7 +110,6 @@ class AuthTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertFalse(created_user.is_active)
         self.assertTrue(AccountActivation.objects.filter(user=created_user).exists())
-        self.assertEqual(created_user.username, 'User' + str(created_user.pk))
         for key in ('token', 'username', 'email', 'user_id'):
             self.assertNotIn(key, response.data)
         
@@ -230,15 +229,15 @@ class UserTests(APITestCase):
         
         Asserts:
             - 200 OK status.
-            - Username and email are not in response.
-            - Required fields (ID only) is in response.
+            - Presence of required fields in response.
         """
         url = reverse('user')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        for key in ('username', 'email'):
-            self.assertNotIn(key, response.data)
-        self.assertIn('id', response.data)
+        for key in ['id', 'user', 'color_id']:
+            self.assertIn(key, response.data)
+        for key in ['id', 'username', 'email']:
+            self.assertIn(key, response.data['user'])
             
     def test_get_user_invalid_token(self):
         """

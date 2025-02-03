@@ -68,7 +68,7 @@ class AccountActivation(UserAction):
         Creates class instance and sends corresponding email to the respective user.
         """
         instance = cls.create_with_token(user, AccountActivationTokenGenerator)
-        activation_url = os.environ['FRONTEND_BASE_URL'] + 'auth/signup/activate/' + instance.token
+        activation_url = os.environ['FRONTEND_BASE_URL'] + 'activate/' + instance.token
         send_account_activation_email(recipient=instance.user.email, activation_url=activation_url)
         return instance
 
@@ -82,7 +82,7 @@ class PasswordReset(UserAction):
         Creates class instance and sends corresponding email to the respective user.
         """
         instance = cls.create_with_token(user, PasswordResetTokenGenerator)
-        reset_url = os.environ['FRONTEND_BASE_URL'] + 'auth/pwReset/perform/' + instance.token
+        reset_url = os.environ['FRONTEND_BASE_URL'] + 'reset_password/' + instance.token
         send_password_reset_email(recipient=instance.user.email, reset_url=reset_url)
         return instance
     

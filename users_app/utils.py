@@ -5,14 +5,13 @@ from django.contrib.sites.models import Site
 from email.mime.base import MIMEBase
 from email import encoders
 
-def get_auth_response_data(user, token):
+def get_auth_response_data(app_user, token):
     """
     Constructs an authentication response data dictionary.
     """
     return {
         'token': token.key,
-        'email': user.email,
-        'user_id': user.pk,
+        'appUser': app_user
     }
 
 def get_domain():

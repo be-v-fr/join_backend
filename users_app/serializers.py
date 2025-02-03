@@ -5,6 +5,7 @@ from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from .models import AccountActivation, PasswordReset, AppUser
 from .utils import get_auth_response_data
+import random
 
 class LoginSerializer(serializers.Serializer):
     """
@@ -29,13 +30,16 @@ class LoginSerializer(serializers.Serializer):
     def create(self, validated_data):
         user = User.objects.get(email=validated_data['email'])
         token, created = Token.objects.get_or_create(user=user)
-        return get_auth_response_data(user=user, token=token)              
+        app_user = AppUser.objects.get(user=user)
+        app_user_serializer = AppUserSerializer(app_user)
+        return get_auth_response_data(app_user=app_user_serializer.data, token=token)              
 
 class RegistrationSerializer(serializers.Serializer):
     """
     Serializer for user registration, handling email and password validation.
     Also creates user instance and corresponding account activation by email.
     """
+    username = serializers.CharField(max_length=63)
     email = serializers.EmailField(max_length=63)
     password = serializers.CharField(max_length=63, write_only=True)
     
@@ -49,17 +53,17 @@ class RegistrationSerializer(serializers.Serializer):
         return value
     
     def create(self, validated_data):
-        created_user = User.objects.create_user(username='User', **validated_data)
-        created_user.username += str(created_user.pk)
+        created_user = User.objects.create_user(**validated_data)
         created_user.is_active = False
         created_user.save()
+        AppUser.objects.create(user=created_user, color_id=random.randint(0,24))
         AccountActivation.create_with_email(user=created_user)
         return {'success': 'We have sent you a link to activate your password.'}
     
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id']
+        fields = ['id', 'username', 'email']
 
 class AccountActivationSerializer(serializers.Serializer):
     """
