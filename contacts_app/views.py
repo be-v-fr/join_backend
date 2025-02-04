@@ -33,6 +33,9 @@ class ContactsView(APIView):
         app_user = AppUser.objects.get(user=request.user)
         request.data['app_user'] = app_user.id
         serializer = CustomContactSerializer(data=request.data)
+        contact_user_id = request.data['contact_user'] or None
+        if contact_user_id and contact_user_id < 1:
+            request.data.pop['contact_user']
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -11,7 +11,7 @@ class CustomContact(models.Model):
     phone = models.CharField(max_length=20, default=None, blank=True, null=True)
     color_id = models.PositiveSmallIntegerField(validators=[MaxValueValidator(24)], default=None, blank=True, null=True)
     app_user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='user_set', default=None, blank=True, null=True)
-    
+    contact_user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='contact_set', default=None, blank=True, null=True)
     
     def __str__(self):
         """

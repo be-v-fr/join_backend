@@ -26,7 +26,7 @@ class ContactTests(TestCase):
         Test creating a new contact.
         """
         url = reverse('contacts')
-        data = {'name': 'Contact 1'}
+        data = {'name': 'Contact 1', 'contact_user': 1}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 

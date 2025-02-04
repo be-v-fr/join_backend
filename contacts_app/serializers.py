@@ -7,8 +7,8 @@ class CustomContactSerializer(serializers.HyperlinkedModelSerializer):
     """
     Serializer for the CustomContact model, linking contacts to AppUsers.
     """
-    app_user = serializers.PrimaryKeyRelatedField(queryset=AppUser.objects.all(), default=AppUserSerializer())
-    
+    contact_user = serializers.PrimaryKeyRelatedField(queryset=AppUser.objects.all(), required=False)
+
     class Meta:
         model = CustomContact
-        fields = ['id', 'app_user', 'name', 'email', 'phone', 'color_id']
+        fields = ['id', 'name', 'email', 'phone', 'color_id', 'contact_user']
