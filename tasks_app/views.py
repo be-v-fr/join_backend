@@ -202,7 +202,17 @@ async def tasks_stream(request):
                 yield f'data: \n\n'
                 tasks_changed = False
                 
-    return get_cors_streaming_response(event_stream)
+    def sync_generator():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        async_gen = event_stream()
+        while True:
+            try:
+                yield loop.run_until_complete(async_gen.__anext__())
+            except StopAsyncIteration:
+                break
+
+    return get_cors_streaming_response(sync_generator)
 
 async def subtasks_stream(request):
     """
@@ -219,4 +229,14 @@ async def subtasks_stream(request):
                 yield f'data: \n\n'
                 subtasks_changed = False
 
-    return get_cors_streaming_response(event_stream)
+    def sync_generator():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        async_gen = event_stream()
+        while True:
+            try:
+                yield loop.run_until_complete(async_gen.__anext__())
+            except StopAsyncIteration:
+                break
+
+    return get_cors_streaming_response(sync_generator)
