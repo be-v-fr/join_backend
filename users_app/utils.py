@@ -2,6 +2,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.http import StreamingHttpResponse, JsonResponse
 from email.mime.base import MIMEBase
 from email import encoders
 from rest_framework.response import Response
@@ -99,3 +100,17 @@ def send_password_reset_email(recipient, reset_url):
     email_data = generate_email_base_data(recipient)
     email_data.update({'reset_url': reset_url})
     send_email_with_data('Reset your password', 'reset_password', recipient, email_data)
+
+def get_cors_streaming_response(event_stream):
+    response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    response["Access-Control-Allow-Origin"] = "*" 
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Allow-Headers"] = "Content-Type"
+    return response
+
+def get_preflight_response():
+    response = JsonResponse({"message": "CORS preflight OK"})
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Allow-Headers"] = "Content-Type"
+    return response

@@ -1,4 +1,3 @@
-from django.http import StreamingHttpResponse
 from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.response import Response
@@ -9,10 +8,10 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny, IsAuthenticated
 import asyncio
 from .models import AppUser
-from .serializers import LoginSerializer, RegistrationSerializer, UserSerializer, AppUserSerializer
+from .serializers import LoginSerializer, RegistrationSerializer, AppUserSerializer
 from .serializers import AccountActivationSerializer
 from .serializers import RequestPasswordResetSerializer, PerformPasswordResetSerializer
-from .utils import get_auth_response
+from .utils import get_auth_response, get_cors_streaming_response, get_preflight_response
 
 users_changed = False
 
@@ -171,6 +170,9 @@ async def users_stream(request):
     """
     Sends empty events to the client for user data update notifications.
     """
+    if request.method == "OPTIONS":
+        return get_preflight_response()
+    
     async def event_stream():
         global users_changed
         while True:
@@ -179,4 +181,4 @@ async def users_stream(request):
                 yield f'data: \n\n'
                 users_changed = False
                                
-    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    return get_cors_streaming_response(event_stream())

@@ -8,6 +8,7 @@ from rest_framework import status
 import asyncio
 from users_app.models import AppUser
 from users_app.serializers import AppUserSerializer
+from users_app.utils import get_cors_streaming_response, get_preflight_response
 from .models import Task, Subtask
 from .serializers import TaskSerializer, SubtaskSerializer
 
@@ -190,6 +191,9 @@ async def tasks_stream(request):
     """
     Sends empty events to the client for task data update notifications.
     """
+    if request.method == "OPTIONS":
+        return get_preflight_response()
+    
     async def event_stream():
         global tasks_changed
         while True:
@@ -198,12 +202,15 @@ async def tasks_stream(request):
                 yield f'data: \n\n'
                 tasks_changed = False
                 
-    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    return get_cors_streaming_response(event_stream())
 
 async def subtasks_stream(request):
     """
     Sends empty events to the client for subtask data update notifications.
     """
+    if request.method == "OPTIONS":
+        return get_preflight_response()
+    
     async def event_stream():
         global subtasks_changed
         while True:
@@ -212,4 +219,4 @@ async def subtasks_stream(request):
                 yield f'data: \n\n'
                 subtasks_changed = False
 
-    return StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+    return get_cors_streaming_response(event_stream())
