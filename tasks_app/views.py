@@ -202,7 +202,7 @@ async def tasks_stream(request):
                 yield f'data: \n\n'
                 tasks_changed = False
                 
-    return get_cors_streaming_response(event_stream())
+    return get_cors_streaming_response(event_stream)
 
 async def subtasks_stream(request):
     """
@@ -219,4 +219,4 @@ async def subtasks_stream(request):
                 yield f'data: \n\n'
                 subtasks_changed = False
 
-    return get_cors_streaming_response(event_stream())
+    return get_cors_streaming_response(event_stream)

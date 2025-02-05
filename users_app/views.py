@@ -12,6 +12,7 @@ from .serializers import LoginSerializer, RegistrationSerializer, AppUserSeriali
 from .serializers import AccountActivationSerializer
 from .serializers import RequestPasswordResetSerializer, PerformPasswordResetSerializer
 from .utils import get_auth_response, get_cors_streaming_response, get_preflight_response
+from django.http import StreamingHttpResponse
 
 users_changed = False
 
@@ -180,5 +181,5 @@ async def users_stream(request):
             if users_changed:
                 yield f'data: \n\n'
                 users_changed = False
-                               
-    return get_cors_streaming_response(event_stream())
+        
+    return get_cors_streaming_response(event_stream)

@@ -101,8 +101,8 @@ def send_password_reset_email(recipient, reset_url):
     email_data.update({'reset_url': reset_url})
     send_email_with_data('Reset your password', 'reset_password', recipient, email_data)
 
-def get_cors_streaming_response(event_stream):
-    response = StreamingHttpResponse(event_stream(), content_type='text/event-stream')
+def get_cors_streaming_response(event_stream_func):
+    response = StreamingHttpResponse(event_stream_func(), content_type='text/event-stream')
     response["Access-Control-Allow-Origin"] = "*" 
     response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
     response["Access-Control-Allow-Headers"] = "Content-Type"
