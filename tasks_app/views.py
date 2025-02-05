@@ -1,4 +1,3 @@
-from django.http import StreamingHttpResponse
 from django.contrib.auth.models import User
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -8,7 +7,7 @@ from rest_framework import status
 import asyncio
 from users_app.models import AppUser
 from users_app.serializers import AppUserSerializer
-from users_app.utils import get_cors_streaming_response, get_preflight_response
+from users_app.utils import get_cors_streaming_response, get_preflight_response, is_client_disconnected
 from .models import Task, Subtask
 from .serializers import TaskSerializer, SubtaskSerializer
 
@@ -201,6 +200,8 @@ async def tasks_stream(request):
             if tasks_changed:
                 yield f'data: \n\n'
                 tasks_changed = False
+            if await is_client_disconnected(request):
+                break
                 
     def sync_generator():
         loop = asyncio.new_event_loop()
@@ -228,6 +229,8 @@ async def subtasks_stream(request):
             if subtasks_changed:
                 yield f'data: \n\n'
                 subtasks_changed = False
+            if await is_client_disconnected(request):
+                break
 
     def sync_generator():
         loop = asyncio.new_event_loop()

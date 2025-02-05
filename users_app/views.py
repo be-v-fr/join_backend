@@ -11,8 +11,7 @@ from .models import AppUser
 from .serializers import LoginSerializer, RegistrationSerializer, AppUserSerializer
 from .serializers import AccountActivationSerializer
 from .serializers import RequestPasswordResetSerializer, PerformPasswordResetSerializer
-from .utils import get_auth_response, get_cors_streaming_response, get_preflight_response
-from django.http import StreamingHttpResponse
+from .utils import get_auth_response, get_cors_streaming_response, get_preflight_response, is_client_disconnected
 
 users_changed = False
 
@@ -181,6 +180,8 @@ async def users_stream(request):
             if users_changed:
                 yield f'data: \n\n'
                 users_changed = False
+            if await is_client_disconnected(request):
+                break
         
     def sync_generator():
         loop = asyncio.new_event_loop()

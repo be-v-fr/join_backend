@@ -114,3 +114,10 @@ def get_preflight_response():
     response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
     response["Access-Control-Allow-Headers"] = "Content-Type"
     return response
+
+async def is_client_disconnected(request):
+    try:
+        await request.body
+        return False
+    except Exception:
+        return True
