@@ -4,6 +4,8 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from email.mime.base import MIMEBase
 from email import encoders
+from rest_framework.response import Response
+from rest_framework import status 
 
 def get_auth_response_data(app_user, token):
     """
@@ -13,6 +15,10 @@ def get_auth_response_data(app_user, token):
         'token': token.key,
         'appUser': app_user
     }
+
+def get_auth_response(app_user, token):
+    data = get_auth_response_data(app_user, token)
+    return Response(data, status=status.HTTP_200_OK)
 
 def get_domain():
     """

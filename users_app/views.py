@@ -1,14 +1,18 @@
 from django.http import StreamingHttpResponse
+from django.contrib.auth.models import User
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 from rest_framework.permissions import AllowAny, IsAuthenticated
 import asyncio
 from .models import AppUser
 from .serializers import LoginSerializer, RegistrationSerializer, UserSerializer, AppUserSerializer
 from .serializers import AccountActivationSerializer
 from .serializers import RequestPasswordResetSerializer, PerformPasswordResetSerializer
+from .utils import get_auth_response
 
 users_changed = False
 
@@ -28,6 +32,39 @@ class LoginView(APIView):
             response_data = serializer.save()
             return Response(response_data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class GuestLoginView(ObtainAuthToken):
+    """
+    Allows guest users to log in by creating or using an existing guest account.
+    """
+    def login_existing_guest(self, username):
+        """
+        Logs in an existing guest user by their username and returns a token.
+        """
+        user = User.objects.get(username=username)
+        if user and len(user.email) > 9 and user.email[-9:] == 'token.key':
+            token, created = Token.objects.get_or_create(user=user)
+            app_user = AppUser.objects.get(user=user)
+            if app_user:
+                app_user_data = AppUserSerializer(app_user).data
+                return get_auth_response(app_user=app_user_data, token=token)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)        
+    
+    def post(self, request, *args, **kwargs):
+        """
+        Logs in an existing guest or creates a new guest account, then returns a token.
+        """
+        username = request.data['username']
+        if len(username) > 0:
+            return self.login_existing_guest(username)
+        created_guest = User.objects.create(username='temp', email='temp@temp.com', password='guestlogin')
+        token = Token.objects.create(user=created_guest)
+        created_guest.username = token.key
+        created_guest.email = token.key + '@token.key'
+        created_guest.save()
+        created_app_user = AppUser.objects.create(user=created_guest)
+        created_app_user_data = AppUserSerializer(created_app_user).data
+        return get_auth_response(app_user=created_app_user_data, token=token)
 
 class RegistrationView(APIView):
     """
