@@ -16,25 +16,23 @@ Customers can create offer orders and customer reviews for the related business.
 Local setup:
 ============
 
-- Install the Python dependencies listed in "requirements.txt".
-- Run "python manage.py makemigrations" in the shell
-- Run "python manage.py migrate"
+- Install the Python dependencies listed in `requirements.txt`.
+- Run `python manage.py makemigrations` in the shell
+- Run `python manage.py migrate`
 
 Local hosting:
 ==============
 
 To use your own device as server:
-- Run "python manage.py runserver"
+- Run `python manage.py runserver`
 
-You can use both "http://localhost:8000/" and "http://127.0.0.1:8000/" as base URLs.
+You can use both `http://localhost:8000/` and `http://127.0.0.1:8000/` as base URLs.
 
-The "admin/" sub-URL features the default Django database interface. To login, you need
+The `admin/` sub-URL features the default Django database interface. To login, you need
 to create an admin account:
-- Run "python manage.py createsuperuser"
+- Run `python manage.py createsuperuser`
 
-The "api/" sub-URL features the API URLs as listed in the "urls.py" files prevalent in the
-"api" folder of the sub-app packages ("users_app/api", "content_app/api", "statistics_app/api").
-When accessing the URLs via browser, the default Django REST Framework interface will show.
+The `api/` sub-URL features the API URLs as listed in the `./join_backend/urls.py` file.
 
 Documentation:
 ==============
@@ -51,5 +49,5 @@ mentioned above.
 
 To gain an insight into the data structure required for writing, study
 - The tests for the respective POST and PATCH requests towards the endpoint in interest.
-- The serializers in the respective "serializers.py" file or "serializers" folder.
+- The serializers in the respective `serializers.py` file or `serializers` folder.
 - The documentation.
