@@ -39,7 +39,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:4200',
     'https://join.bengt-fruechtenicht.de'
 ]
-CORS_ALLOW_METHODS = ["GET", "OPTIONS"]
+CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 CORS_ALLOW_HEADERS = ["*"]
 
 # Application definition
