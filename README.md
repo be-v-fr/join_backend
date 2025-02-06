@@ -1,4 +1,4 @@
-*Are you looking for the Join frontend repo? Look no further:* https://github.com/be-v-fr/join_frontend
+*Looking for the Join frontend repo? Look no further:* https://github.com/be-v-fr/join_frontend
 
 Join backend is a Django backend providing a Kanban board for all users in the database. All tasks are
 seen by everyone. Moreover, users can assign tasks to each other and view each other as contacts,
