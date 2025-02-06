@@ -67,7 +67,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class AccountActivationSerializer(serializers.Serializer):
     """
-    Serializer for performing password resets.
+    Serializer for performing account activation.
     """
     token = serializers.CharField(write_only=True, required=True)
     
